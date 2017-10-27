@@ -1,11 +1,14 @@
-
 package devgame;
 
 import Controllers.GameEngine;
+import Controllers.UseItem;
 import GameExceptions.CharacterException;
 import GameExceptions.ItemException;
+import GameExceptions.YouDontHaveThatException;
+import Models.Armor;
 import Models.Item;
 import Models.Player;
+import Models.Weapon;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PipedOutputStream;
@@ -29,6 +32,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 public class FXMLDocumentController implements Initializable {
 
@@ -86,7 +90,7 @@ public class FXMLDocumentController implements Initializable {
             sendText();
             commandField.clear();
         }
-        Platform.runLater(()-> playerStats());
+        Platform.runLater(() -> playerStats());
 
     }
 
@@ -146,11 +150,43 @@ public class FXMLDocumentController implements Initializable {
             }
         }
     }
-    
-    private void listView(){
-        ObservableList<Item> invList = FXCollections.<Item>observableArrayList(player.getInventory().getInventory());
+
+    private void listView() {
+        //ObservableList<Item> invList = FXCollections.<Item>observableArrayList(player.getInventory().getInventory());
         // item obserable
         // loop through inventory adding items to obslist
-        inventoryListView.setItems(invList);
+        //inventoryListView.setItems(invList);
+        inventoryListView.getItems().clear();
+        inventoryListView.getItems().addAll(player.getInventory().getInventory());
+    }
+
+    @FXML
+    private void inventoryInteraction(MouseEvent event) {
+        Item item = inventoryListView.getSelectionModel().getSelectedItem();
+        if (item == null) {
+        } else if (item instanceof Weapon) {
+            try {
+                player.equipWeapon(item.getName());
+                playerStats();
+            } catch (ItemException | YouDontHaveThatException ex) {
+                System.out.println("error");
+            }
+        } else if (item instanceof Armor) {
+            try {
+                player.equipArmor(item.getName());
+                playerStats();
+            } catch (ItemException | YouDontHaveThatException ex) {
+                System.out.println("error");
+            }
+        } else if (item instanceof Item && (item.getName().equalsIgnoreCase("Medicine") || item.getName().equalsIgnoreCase("Elixir"))) {
+            if (player.getHealthPoints() == player.getMaxHealth() ) {
+                System.out.println("Your health is already full");
+            } else {
+                UseItem.useItem(player, item.getName());
+                playerStats();
+            }
+        } else {
+            System.out.println("That can't be used");
+        }
     }
 }
