@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="571.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="devgame.FXMLDocumentController">
+    <children>
+        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+      <TextArea fx:id="textArea" editable="false" layoutX="27.0" layoutY="70.0" prefHeight="358.0" prefWidth="627.0" style="-fx-text-alignment: center;" wrapText="true" />
+      <TextField id="commandField" fx:id="commandField" layoutX="266.0" layoutY="455.0" onKeyPressed="#submitCommand" promptText="Enter your command" />
+      <Button fx:id="newGameButton" layoutX="22.0" layoutY="26.0" mnemonicParsing="false" onAction="#newGame" text="New Game" />
+      <Button fx:id="loadGameButton" layoutX="577.0" layoutY="26.0" mnemonicParsing="false" onAction="#loadGame" text="Load Game" />
+    </children>
+</AnchorPane>
