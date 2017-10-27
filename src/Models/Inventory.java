@@ -20,7 +20,7 @@ public class Inventory implements Serializable{
 		inventory = new ArrayList<Item>();
 	}
 	
-	private List<Item> getInventory(){
+	public List<Item> getInventory(){
 		return this.inventory;
 	}
 	

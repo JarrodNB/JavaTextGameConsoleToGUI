@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="571.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="devgame.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="571.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="devgame.FXMLDocumentController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <TextArea fx:id="textArea" editable="false" layoutX="27.0" layoutY="70.0" prefHeight="358.0" prefWidth="627.0" style="-fx-text-alignment: center;" wrapText="true" />
-      <TextField id="commandField" fx:id="commandField" layoutX="266.0" layoutY="455.0" onKeyPressed="#submitCommand" promptText="Enter your command" />
+      <TextArea fx:id="textArea" editable="false" layoutX="27.0" layoutY="70.0" prefHeight="358.0" prefWidth="681.0" style="-fx-text-alignment: center;" wrapText="true" />
+      <TextField id="commandField" fx:id="commandField" layoutX="276.0" layoutY="430.0" onKeyPressed="#submitCommand" promptText="Enter your command" />
       <Button fx:id="newGameButton" layoutX="22.0" layoutY="26.0" mnemonicParsing="false" onAction="#newGame" text="New Game" />
-      <Button fx:id="loadGameButton" layoutX="577.0" layoutY="26.0" mnemonicParsing="false" onAction="#loadGame" text="Load Game" />
-      <GridPane layoutX="26.0" layoutY="455.0">
+      <Button fx:id="loadGameButton" layoutX="631.0" layoutY="26.0" mnemonicParsing="false" onAction="#loadGame" text="Load Game" />
+      <GridPane layoutX="26.0" layoutY="455.0" prefHeight="90.0" prefWidth="89.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -36,6 +36,25 @@
             <Label fx:id="playerGold" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <ListView fx:id="inventoryListView" layoutX="454.0" layoutY="439.0" prefHeight="116.0" prefWidth="200.0" />
+      <ListView fx:id="inventoryListView" layoutX="508.0" layoutY="442.0" prefHeight="116.0" prefWidth="200.0" />
+      <GridPane layoutX="155.0" layoutY="455.0" prefHeight="90.0" prefWidth="227.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="45.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.0" minWidth="10.0" prefWidth="159.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Attack:" />
+            <Label text="Defense:" GridPane.rowIndex="1" />
+            <Label text="Equipment:" GridPane.rowIndex="2" />
+            <Label fx:id="playerAttack" GridPane.columnIndex="1" />
+            <Label fx:id="playerDefense" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="playerEquipment" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
     </children>
 </AnchorPane>

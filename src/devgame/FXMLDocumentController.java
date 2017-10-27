@@ -1,10 +1,11 @@
-/*
- */
+
 package devgame;
 
 import Controllers.GameEngine;
 import GameExceptions.CharacterException;
 import GameExceptions.ItemException;
+import Models.Item;
+import Models.Player;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PipedOutputStream;
@@ -16,6 +17,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,10 +30,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-/**
- *
- * @author jnbcb
- */
 public class FXMLDocumentController implements Initializable {
 
     @FXML
@@ -45,8 +44,13 @@ public class FXMLDocumentController implements Initializable {
     private Button newGameButton;
     @FXML
     private Button loadGameButton;
-    
+
     GameEngine engine;
+
+    Player player;
+
+    Thread thread;
+
     @FXML
     private Label playerName;
     @FXML
@@ -54,7 +58,13 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label playerGold;
     @FXML
-    private ListView<?> inventoryListView;
+    private ListView<Item> inventoryListView;
+    @FXML
+    private Label playerAttack;
+    @FXML
+    private Label playerDefense;
+    @FXML
+    private Label playerEquipment;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -76,6 +86,8 @@ public class FXMLDocumentController implements Initializable {
             sendText();
             commandField.clear();
         }
+        Platform.runLater(()-> playerStats());
+
     }
 
     public void appendText(String str) {
@@ -83,10 +95,11 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void startGame(String choice) {
-        Thread thread = new Thread(new Runnable() {
+        engine = new GameEngine();
+        thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                engine = new GameEngine();
+
                 try {
                     StringBufferInputStream s = new StringBufferInputStream(choice);
                     System.setIn(s);
@@ -97,17 +110,14 @@ public class FXMLDocumentController implements Initializable {
             }
         });
         thread.start();
-        
     }
 
     private void sendText() {
         StringBufferInputStream s = new StringBufferInputStream(commandField.getText());
         System.setIn(s);
-        synchronized(GameEngine.LOCK){
-            //System.out.println("In notify block");
+        synchronized (GameEngine.LOCK) {
             GameEngine.LOCK.notifyAll();
         }
-        
     }
 
     @FXML
@@ -118,5 +128,29 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void loadGame(ActionEvent event) {
         startGame("load game");
+    }
+
+    private void playerStats() {
+        if (engine != null) {
+            if (engine.getUniverse() != null) {
+                player = engine.getUniverse().getPlayer();
+                if (player != null) {
+                    playerName.setText(player.getName());
+                    playerHP.setText(String.valueOf(player.getHealthPoints()));
+                    playerGold.setText(String.valueOf(player.getGold()));
+                    playerAttack.setText(String.valueOf(player.getCalcAttack()));
+                    playerDefense.setText(String.valueOf(player.getCalcDefense()));
+                    playerEquipment.setText(player.getEquipment());
+                    listView();
+                }
+            }
+        }
+    }
+    
+    private void listView(){
+        ObservableList<Item> invList = FXCollections.<Item>observableArrayList(player.getInventory().getInventory());
+        // item obserable
+        // loop through inventory adding items to obslist
+        inventoryListView.setItems(invList);
     }
 }

@@ -82,5 +82,25 @@ public class Player extends Character implements Serializable{
 	public String toString() {
 		return super.toString() + " Attack: " + getCalcAttack() + " Defense: " + this.getCalcDefense();
 	}
+        
+        public Armor getCurrentArmor(){
+            return this.currentArmor;
+        }
+        
+        public String getEquipment(){
+            String result = "";
+            if (this.currentWeapon == null){
+                result += "None";
+            } else {
+                result += this.currentWeapon.getName();
+            }
+            result += "/";
+            if (this.currentArmor == null){
+                result += "None";
+            } else {
+                result += this.currentArmor.getName();
+            }
+            return result;
+        }
 	
 }
