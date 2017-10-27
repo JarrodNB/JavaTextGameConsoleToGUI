@@ -18,7 +18,7 @@ public class OpenInventory {
 		System.out.println(player.getInventory().toString());
 		System.out.println(HELP);
 		while (true) {
-			String input = GameEngine.nextLine(room.getUniverse().getEngine());
+			String input = GameEngine.nextLine();
 			if (input.equalsIgnoreCase("exit")) {
 				//scanner.close();
 				return;

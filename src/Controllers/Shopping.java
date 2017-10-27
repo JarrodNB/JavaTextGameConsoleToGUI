@@ -22,7 +22,7 @@ public class Shopping {
 		while (true) {
 			System.out.println("You have " + player.getGold() + " gold.");
 			System.out.println("Would you like to buy, sell, examine an item, or leave?");
-			String input = GameEngine.nextLine(room.getUniverse().getEngine()).toLowerCase();
+			String input = GameEngine.nextLine().toLowerCase();
 			if (input.startsWith("leave")) {
 				//scanner.close();
 				System.out.println("You are back at home base.");

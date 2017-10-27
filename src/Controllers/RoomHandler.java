@@ -18,7 +18,7 @@ public class RoomHandler {
 	public static void enter(Room room) throws PlayerIsDeadException, ItemException, CharacterException {
 		System.out.println(room.getDescription());
 		while (true) {
-			String input = GameEngine.nextLine(room.getUniverse().getEngine()).toLowerCase();
+			String input = GameEngine.nextLine().toLowerCase();
 			String destination = roomCommands(room, input);
 			if (destination != null && room.isExitInRoom(destination)) {
 				System.out.println("You are traveling to " + destination);

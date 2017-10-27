@@ -16,7 +16,7 @@ public class SolvePuzzle {
 		Puzzle puzzle = roomPuzzle.getPuzzle();
 		System.out.println(puzzle.getQuestion());
 		while (true) {
-			String userInput = GameEngine.nextLine(room.getUniverse().getEngine());
+			String userInput = GameEngine.nextLine();
 			if (userInput.equalsIgnoreCase("get hint")) {
 				System.out.println(puzzle.getHint());
 			} else if (userInput.equalsIgnoreCase(puzzle.getAnswer())) {

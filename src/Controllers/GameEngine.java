@@ -5,14 +5,15 @@ import GameExceptions.CharacterException;
 import GameExceptions.ItemException;
 import GameExceptions.PlayerIsDeadException;
 import Models.Universe;
-import devgame.MyScanner;
 import java.io.Serializable;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GameEngine implements Serializable{
 
-    private Universe universe;    
+    private Universe universe = null;
+    public static final Object LOCK = new Object();
     
 	public static void main(String[] args) throws ItemException, CharacterException {
 		GameEngine engine = new GameEngine();
@@ -24,7 +25,7 @@ public class GameEngine implements Serializable{
 	
 	public void start() throws ItemException, CharacterException {
 		while (true) {
-			String input = nextLine(this);
+			String input = nextLine();
 			Universe universe = null;
 			if (input.equalsIgnoreCase("new game")) {
 				universe = NewGame.newGame(this);
@@ -38,7 +39,6 @@ public class GameEngine implements Serializable{
 			try {
 				if (universe != null) {
 					//scanner.close();
-                                        universe.setGameEngine(this);
                                         this.universe = universe; // testing
 					RoomHandler.enter(universe.getCurrentRoom());
 				}
@@ -52,20 +52,20 @@ public class GameEngine implements Serializable{
 		}
 	}
         
-        public static String nextLine(GameEngine engine){
-                MyScanner scanner = new MyScanner(System.in);
+        public static String nextLine(){
+                Scanner scanner = new Scanner(System.in);
                 if (!scanner.hasNextLine()){
                     //System.out.println("scanner does not have next line");
-                synchronized(engine){
+                synchronized(LOCK){
                     try {
                         //System.out.println("in wait block");
-                        engine.wait();
+                        LOCK.wait();
                     } catch (InterruptedException ex) {
                         Logger.getLogger(GameEngine.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                // System.out.println("Assigning new scanner");
-                scanner = new MyScanner(System.in);
+                scanner = new Scanner(System.in);
                 }
                 //System.out.println("Returning command");
                 return scanner.nextLine();
@@ -79,6 +79,10 @@ public class GameEngine implements Serializable{
 //                }
 //                return result = scanner.nextLine();
                 
+        }
+        
+        public Universe getUniverse(){
+            return this.universe;
         }
         
 }

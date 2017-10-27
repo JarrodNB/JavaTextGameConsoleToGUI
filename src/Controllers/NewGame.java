@@ -15,10 +15,10 @@ public class NewGame {
 		
                     new File("C:\\Voyager\\").mkdir();
                     System.out.println("Select a name for your player.");
-                    String name = GameEngine.nextLine(engine);
+                    String name = GameEngine.nextLine();
                     while(!validName(name)) {
                     System.out.println("Your name may only contain letters and may not be blank. Enter another name.");
-                    name = GameEngine.nextLine(engine);
+                    name = GameEngine.nextLine();
                     }
                     Inventory inventory = new Inventory();
                     try {

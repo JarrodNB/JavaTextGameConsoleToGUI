@@ -13,7 +13,7 @@ public class LoadGame {
 
 	public static Universe load(GameEngine engine) {
 		System.out.println("What is the name of your player?");
-		String fileName = "C:\\Voyager\\" + GameEngine.nextLine(engine) + ".dat";
+		String fileName = "C:\\Voyager\\" + GameEngine.nextLine() + ".dat";
 		FileInputStream fileStream = null;
 		try {
 			fileStream = new FileInputStream(fileName);

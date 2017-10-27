@@ -21,7 +21,7 @@ public class Arena {
 		try {
 			while (true) {
 				System.out.println("Will you attack, defend, open inventory, or retreat?");
-				String userInput = GameEngine.nextLine(room.getUniverse().getEngine()).toLowerCase();
+				String userInput = GameEngine.nextLine().toLowerCase();
 				if (userInput.equals("retreat")) {
 					//scanner.close();
 					monster.heal(monster.getMaxHealth());

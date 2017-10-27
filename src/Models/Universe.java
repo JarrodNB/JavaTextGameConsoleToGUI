@@ -16,7 +16,6 @@ public class Universe implements Serializable{
 	private Map<String, Room> rooms;
 	private Player player;
 	private  Room currentRoom;
-        private GameEngine engine;
 	
 	public Universe(Player player) {
 		this.player = player;
@@ -46,13 +45,5 @@ public class Universe implements Serializable{
 	
 	public void setCurrentRoom(Room room) {
 		this.currentRoom = room;
-	}
-	
-        public void setGameEngine(GameEngine engine){
-            this.engine = engine;
-        }
-        
-        public GameEngine getEngine(){
-            return this.engine;
         }
 }

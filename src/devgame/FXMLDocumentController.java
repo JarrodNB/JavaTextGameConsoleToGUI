@@ -21,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -46,6 +47,14 @@ public class FXMLDocumentController implements Initializable {
     private Button loadGameButton;
     
     GameEngine engine;
+    @FXML
+    private Label playerName;
+    @FXML
+    private Label playerHP;
+    @FXML
+    private Label playerGold;
+    @FXML
+    private ListView<?> inventoryListView;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -88,16 +97,17 @@ public class FXMLDocumentController implements Initializable {
             }
         });
         thread.start();
-
+        
     }
 
     private void sendText() {
         StringBufferInputStream s = new StringBufferInputStream(commandField.getText());
         System.setIn(s);
-        synchronized(engine){
+        synchronized(GameEngine.LOCK){
             //System.out.println("In notify block");
-            engine.notifyAll();
+            GameEngine.LOCK.notifyAll();
         }
+        
     }
 
     @FXML
