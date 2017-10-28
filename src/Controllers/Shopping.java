@@ -18,13 +18,10 @@ public class Shopping {
 	public static void shop(Player player, Room room) {
 		System.out.println("Weclome to my shop! Take a look at my wares");
 		System.out.println(shop.displayStock());
-		System.out.println("Your items: " + player.getInventory().toString());
 		while (true) {
-			System.out.println("You have " + player.getGold() + " gold.");
 			System.out.println("Would you like to buy, sell, examine an item, or leave?");
 			String input = GameEngine.nextLine().toLowerCase();
 			if (input.startsWith("leave")) {
-				//scanner.close();
 				System.out.println("You are back at home base.");
 				return;
 			}
@@ -37,95 +34,135 @@ public class Shopping {
 	}
 	
 	private static void shopInput(String input, Player player, Room room) throws CharacterException, ItemException, YouDontHaveThatException, WeaponException {
+            
 		if (input.equals("")) {
 			return;
 		}
+                
 		String[] inputArray = input.split(" ");
-		for (int index = 0; index < inputArray.length; index++) {
+                
+                int length = inputArray.length;
+                if (length == 0){
+                    System.out.println(GameEngine.UNRECOGNIZED_COMMAND);
+                    return;
+                }
+		for (int index = 0; index < length; index++) {
 			inputArray[index] = inputArray[index].substring(0, 1).toUpperCase() + inputArray[index].substring(1, inputArray[index].length());
 		}
 
 		if (inputArray[0].equalsIgnoreCase("buy")) {
 			
-			if (inputArray.length == 3) {
-				String itemName = inputArray[1] + " " + inputArray[2];
-				Item item;
-				if (shop.getStockItem(itemName) != null) {
-					item = shop.getStockItem(itemName);
-					buy(player, item);
-				} else {
-					System.out.println("Thats not an item I have.");
-				}
-			} else if (inputArray.length == 4){
-				String itemName = inputArray[1] + " " + inputArray[2] + " " + inputArray[3];
-				Item item;
-				if (shop.getStockItem(itemName) != null) {
-					item = shop.getStockItem(itemName);
-					buy(player, item);
-				} else {
-					System.out.println("Thats not an item I have.");
-				}
-			} else if (inputArray.length == 2){
-				String itemName = inputArray[1];
-				Item item;
-				if (shop.getStockItem(itemName) != null) {
-					item = shop.getStockItem(itemName);
-					buy(player, item);
-				} else {
-					System.out.println("Thats not an item I have.");
-				}
-			} else {
-				System.out.println("Buy what?");
-			}
+                    switch (length) {
+                        case 3:
+                            {
+                                String itemName = inputArray[1] + " " + inputArray[2];
+                                Item item;
+                                if (shop.getStockItem(itemName) != null) {
+                                    item = shop.getStockItem(itemName);
+                                    buy(player, item);
+                                } else {
+                                    System.out.println("Thats not an item I have.");
+                                }
+                                break;
+                            }
+                        case 4:
+                            {
+                                String itemName = inputArray[1] + " " + inputArray[2] + " " + inputArray[3];
+                                Item item;
+                                if (shop.getStockItem(itemName) != null) {
+                                    item = shop.getStockItem(itemName);
+                                    buy(player, item);
+                                } else {
+                                    System.out.println("Thats not an item I have.");
+                                }
+                                break;
+                            }
+                        case 2:
+                            {
+                                String itemName = inputArray[1];
+                                Item item;
+                                if (shop.getStockItem(itemName) != null) {
+                                    item = shop.getStockItem(itemName);
+                                    buy(player, item);
+                                } else {
+                                    System.out.println("Thats not an item I have.");
+                                }
+                                break;
+                            }
+                        default:
+                            System.out.println("Buy what?");
+                            break;
+                    }
 		}
 		
 		else if (inputArray[0].equalsIgnoreCase("sell")) {
-			if (inputArray.length == 3) {
-				String itemName = inputArray[1] + " " + inputArray[2];
-				Item item;
-				if (shop.getStockItem(itemName) != null) {
-					item = shop.getStockItem(itemName);
-					sell(player, item);
-				} else {
-					System.out.println("Thats not an item that can be sold.");
-				}
-				
-			} else if (inputArray.length == 4){
-				String itemName = inputArray[1] + " " + inputArray[2] + " " + inputArray[3];
-				Item item;
-				if (shop.getStockItem(itemName) != null) {
-					item = shop.getStockItem(itemName);
-					sell(player, item);
-				} else {
-					System.out.println("Thats not an item that can be sold.");
-				}
-			} else if (inputArray.length == 2){
-				String itemName = inputArray[1];
-				Item item;
-				if (shop.getStockItem(itemName) != null) {
-					item = shop.getStockItem(itemName);
-					sell(player, item);
-				} else {
-					System.out.println("Thats not an item that can be sold.");
-				}
-			} else {
-				System.out.println("Sell what?");
-			}
+                    switch (length) {
+                        case 3:
+                            {
+                                String itemName = inputArray[1] + " " + inputArray[2];
+                                Item item;
+                                if (shop.getStockItem(itemName) != null) {
+                                    item = shop.getStockItem(itemName);
+                                    sell(player, item);
+                                } else {
+                                    System.out.println("Thats not an item that can be sold.");
+                                }
+                                break;
+                            }
+                        case 4:
+                            {
+                                String itemName = inputArray[1] + " " + inputArray[2] + " " + inputArray[3];
+                                Item item;
+                                if (shop.getStockItem(itemName) != null) {
+                                    item = shop.getStockItem(itemName);
+                                    sell(player, item);
+                                } else {
+                                    System.out.println("Thats not an item that can be sold.");
+                                }
+                                break;
+                            }
+                        case 2:
+                            {
+                                String itemName = inputArray[1];
+                                Item item;
+                                if (shop.getStockItem(itemName) != null) {
+                                    item = shop.getStockItem(itemName);
+                                    sell(player, item);
+                                } else {
+                                    System.out.println("Thats not an item that can be sold.");
+                                }
+                                break;
+                            }
+                        default:
+                            System.out.println("Sell what?");
+                            break;
+                    }
 		}
 		
 		else if (inputArray[0].equalsIgnoreCase("examine")) {
-			if (inputArray.length == 3) {
-				String itemName = inputArray[1] + " " + inputArray[2];
-				System.out.println(shop.examineItem(itemName));
-			} else if (inputArray.length == 4){
-				String itemName = inputArray[1] + " " + inputArray[2] + " " + inputArray[3];
-				System.out.println(shop.examineItem(itemName));
-			} else if (inputArray.length == 2){
-				String itemName = inputArray[1];
-				System.out.println(shop.examineItem(itemName));
-			} else {
-				System.out.println("Examine what?");
-			}
+                    switch (length) {
+                        case 3:
+                            {
+                                String itemName = inputArray[1] + " " + inputArray[2];
+                                System.out.println(shop.examineItem(itemName));
+                                break;
+                            }
+                        case 4:
+                            {
+                                String itemName = inputArray[1] + " " + inputArray[2] + " " + inputArray[3];
+                                System.out.println(shop.examineItem(itemName));
+                                break;
+                            }
+                        case 2:
+                            {
+                                String itemName = inputArray[1];
+                                System.out.println(shop.examineItem(itemName));
+                                break;
+                            }
+                        default:
+                            System.out.println("Examine what?");
+                            break;
+                    }
 		}
 		
 		else if (inputArray[0].equalsIgnoreCase("open")) {
@@ -157,7 +194,6 @@ public class Shopping {
 	private static void buy(Player player, Item item) throws CharacterException, ItemException {
 		if (player.getGold() < item.getBuyValue()) {
 			System.out.println("You can not afford that.");
-			return;
 		} else {
 			player.setGold(player.getGold() - item.getBuyValue());
 			player.getInventory().addItem(item);

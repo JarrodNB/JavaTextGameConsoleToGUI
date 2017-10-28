@@ -95,6 +95,10 @@ public class RoomHandler {
 		
 		String[] inputArray = input.split(" ");
 		int length = inputArray.length;
+		if (length == 0) {
+			System.out.println(GameEngine.UNRECOGNIZED_COMMAND);
+			return null;
+		}
 		for (int index = 0; index < inputArray.length; index++) {
 			inputArray[index] = inputArray[index].substring(0, 1).toUpperCase() + inputArray[index].substring(1, inputArray[index].length());
 		}

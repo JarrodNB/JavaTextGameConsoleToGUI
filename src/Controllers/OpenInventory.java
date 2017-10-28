@@ -25,7 +25,6 @@ public class OpenInventory {
 			}
 			try {
 				inventoryInput(player, input);
-				System.out.println(player.getInventory().toString());
 			} catch (YouDontHaveThatException | ItemException | PlayerIsDeadException e) {
 				System.out.println(e.getMessage());
 			}
