@@ -7,14 +7,13 @@ import GameExceptions.YouDontHaveThatException;
 import Models.Armor;
 import Models.Item;
 import Models.Player;
-import Models.Room;
 import Models.Weapon;
 
 public class OpenInventory {
 
 	private static final String HELP = "Your possible commands are use itemName, examine itemName, equip itemName, unequip weapon/armor, stats, or exit.";
 
-	public static void openInventory(Player player, Room room) {
+	public static void openInventory(Player player) {
 		System.out.println(player.getInventory().toString());
 		System.out.println(HELP);
 		while (true) {

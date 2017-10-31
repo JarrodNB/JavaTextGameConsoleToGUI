@@ -11,7 +11,7 @@ import Models.Universe;
 
 public class LoadGame {
 
-	public static Universe load(GameEngine engine) {
+	public static Universe load() {
 		System.out.println("What is the name of your player?");
 		String fileName = "C:\\Voyager\\" + GameEngine.nextLine() + ".dat";
 		FileInputStream fileStream = null;

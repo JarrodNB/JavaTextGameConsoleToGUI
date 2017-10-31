@@ -15,7 +15,7 @@ public class Arena {
 	private static final int DEFEND = 2; // defense to be added when defending
 	private static final String HELP = "Your possible commands are \"attack\", \"defend\", \"open inventory\", and \"retreat\".";
 
-	public static void fight(Player player, RoomMonster roomMonster, Room room) throws PlayerIsDeadException{
+	public static void fight(Player player, RoomMonster roomMonster) throws PlayerIsDeadException{
 		Monster monster = roomMonster.getMonster();
 		System.out.println("You have entered into a fight with " + monster.getName() + ".");
 		try {
@@ -28,7 +28,7 @@ public class Arena {
 					System.out.println("You ran away like a coward and they have lost interest in you, though you are still in the same room");
 					return;
 				}
-				fightInput(player, monster, userInput, room);
+				fightInput(player, monster, userInput);
 			}
 		} catch (MonsterIsDeadException dead) {
 			try {
@@ -48,7 +48,6 @@ public class Arena {
 				System.out.println(e.getMessage());
 			}
 		} finally {
-			//scanner.close();
 		}
 		
 	}
@@ -64,7 +63,7 @@ public class Arena {
 		}
 	}
 	
-	private static void fightInput(Player player, Monster monster, String userInput, Room room) throws PlayerIsDeadException, MonsterIsDeadException {
+	private static void fightInput(Player player, Monster monster, String userInput) throws PlayerIsDeadException, MonsterIsDeadException {
 		if (userInput.equals("")) {
 			return;
 		}
@@ -81,7 +80,7 @@ public class Arena {
 				break;
 				
 			case "open inventory":
-				OpenInventory.openInventory(player, room);
+				OpenInventory.openInventory(player);
 				determineDamage(player, monster, player.getCalcDefense());
 				break;
 		

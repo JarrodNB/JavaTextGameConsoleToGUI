@@ -11,7 +11,7 @@ import Models.Universe;
 public class NewGame {
 
         @SuppressWarnings("empty-statement")
-	public static Universe newGame(GameEngine engine) {
+	public static Universe newGame() {
 		
                     new File("C:\\Voyager\\").mkdir();
                     System.out.println("Select a name for your player.");

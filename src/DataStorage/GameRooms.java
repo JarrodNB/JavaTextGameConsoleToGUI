@@ -415,7 +415,7 @@ public class GameRooms {
 		RoomPuzzle roomPuzzle = null;
 		RoomGold roomGold = null;
 		Map<String, Boolean> exits = new HashMap<String, Boolean>();
-		exits.put("Outside Power-Plant", false);
+		exits.put("Outside Power Plant", false);
 		exits.put("Generator Room", false);
 		exits.put("Destroyed Wing", false);
 		exits.put("Manager's Room", false);
@@ -434,9 +434,9 @@ public class GameRooms {
 		RoomMonster roomMonster = new RoomMonster(GameMonsters.getSpacePirate(null, 100));
 		RoomPuzzle roomPuzzle = null;
 		RoomGold roomGold = null;
-		Map<String, Boolean> exits = new HashMap<String, Boolean>();
+		Map<String, Boolean> exits = new HashMap<>();
 		exits.put("Mercury Surface", false);
-		Room room = new Room("Outside Power-Plant", description, roomItems, roomMonster, roomPuzzle, roomGold);
+		Room room = new Room("Outside Power Plant", description, roomItems, roomMonster, roomPuzzle, roomGold);
 		room.setExits(exits);
 		return room;
 	}
@@ -675,7 +675,7 @@ public class GameRooms {
 		rooms.put("Volcano", getVolcano());
 		rooms.put("Field", getField());
 		rooms.put("Mercury Surface", getMercurySurface());
-		rooms.put("Outside Power-Plant", getOutsidePowerPlant());
+		rooms.put("Outside Power Plant", getOutsidePowerPlant());
 		rooms.put("Generator Room", getGeneratorRoom());
 		rooms.put("Destroyed Wing", getDestroyedWing());
 		rooms.put("Manager's Room", getManagerRoom());
