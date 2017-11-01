@@ -14,6 +14,7 @@ public class RoomPuzzle extends RoomObject implements Serializable{
 	public RoomPuzzle(Puzzle puzzle) {
 		super();
 		this.puzzle = puzzle;
+                isInRoom = true;
 	}
 
 	public Puzzle getPuzzle() {

@@ -1,19 +1,20 @@
-
 package Models;
 
-public class RoomObject {
+import java.io.Serializable;
 
-	private boolean isInRoom;
-	
-	public RoomObject() {
-		isInRoom = true;
-	}
-	
-	public boolean isInRoom() {
-		return isInRoom;
-	}
-	
-	public void setIsInRoom(boolean isInRoom) {
-		this.isInRoom = isInRoom;
-	}
+public class RoomObject implements Serializable{
+
+    public boolean isInRoom;
+
+    public RoomObject() {
+        //isInRoom = true;
+    }
+
+    public boolean isInRoom() {
+        return isInRoom;
+    }
+
+    public void setIsInRoom(boolean isInRoom) {
+        this.isInRoom = isInRoom;
+    }
 }

@@ -27,6 +27,11 @@ public class Weapon extends Item implements Serializable{
 		setUpgradeLevel(0);
 		setUpgradeCost(1);
 	}
+        
+        public Weapon(Weapon weapon) throws WeaponException, ItemException{
+            this(weapon.getId(), weapon.getName(), weapon.getDescription(), weapon.getBuyValue(), 1,
+                    weapon.getAttack(), weapon.getUpgradeAmount());
+        }
 
 	public int getAttack() {
 		return attack;

@@ -16,6 +16,7 @@ public class RoomItem extends RoomObject implements Serializable{
 		super();
 		this.item = item;
 		this.containerName = containerName;
+                isInRoom = true;
 	}
 
 	public Item getItem() {

@@ -150,6 +150,10 @@ public class FXMLDocumentController implements Initializable, Observer {
     }
 
     private void sendText(String command) {
+        if (command == null){ // testing
+            System.out.println("null command");
+            return;
+        }
         StringBufferInputStream s = new StringBufferInputStream(command);
         System.setIn(s);
         synchronized (GameEngine.LOCK) {

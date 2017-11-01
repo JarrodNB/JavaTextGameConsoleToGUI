@@ -47,7 +47,7 @@ public class Player extends Character implements Serializable {
             if (currentWeapon != null) {
                 unequipWeapon();
             }
-            Weapon weapon = (Weapon) this.getInventory().getItem(weaponName);
+            Weapon weapon = (Weapon) this.getInventory().getItem(weaponName); // should only return quanitity 1
             this.currentWeapon = weapon;
         } else {
             throw new YouDontHaveThatException("You dont have that weapon");

@@ -14,6 +14,7 @@ public class RoomMonster extends RoomObject implements Serializable{
 	public RoomMonster(Monster monster) {
 		super();
 		this.monster = monster;
+                isInRoom = true;
 	}
 
 	public Monster getMonster() {

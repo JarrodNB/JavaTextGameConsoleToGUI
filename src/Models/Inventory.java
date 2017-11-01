@@ -1,12 +1,16 @@
 package Models;
 
+import GameExceptions.ArmorException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import GameExceptions.ItemException;
+import GameExceptions.WeaponException;
 import GameExceptions.YouDontHaveThatException;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Inventory extends Observable implements Serializable {
 
@@ -76,7 +80,21 @@ public class Inventory extends Observable implements Serializable {
             if (item.getName().equalsIgnoreCase(name)) {
                 Item itemResult = item;
                 removeItem(item, 1);
-                return itemResult;
+                if (itemResult instanceof Weapon){
+                    try {
+                        return new Weapon((Weapon) itemResult);
+                    } catch (WeaponException ex) {
+                        Logger.getLogger(Inventory.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else if (itemResult instanceof Armor){
+                    try {
+                        return new Armor((Armor) itemResult);
+                    } catch (ArmorException ex) {
+                        Logger.getLogger(Inventory.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    return new Item(itemResult);
+                }
             }
         }
         throw new YouDontHaveThatException("You do not have that Item. " + getClass().getSimpleName());

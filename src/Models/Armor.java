@@ -19,6 +19,10 @@ public class Armor extends Item implements Serializable{
 		setDefense(defense);
 	}
 
+        public Armor(Armor armor) throws ItemException, ArmorException{
+            this(armor.getId(), armor.getName(), armor.getDescription(), armor.getBuyValue(), 1, armor.getDefence());
+        }
+        
 	public int getDefence() {
 		return defense;
 	}

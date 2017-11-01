@@ -16,6 +16,7 @@ public class RoomGold extends RoomObject implements Serializable{
 		super();
 		this.gold = gold;
 		this.containerName = containerName;
+                isInRoom = true;
 	}
 	
 	public int getGold() {
