@@ -144,6 +144,7 @@ public class Room implements Serializable {
             getExits().entrySet().forEach((entry) -> {
                 commands.add("Go to " + entry.getKey());
             });
+            commands.add("Save");
         }
         return commands;
     }

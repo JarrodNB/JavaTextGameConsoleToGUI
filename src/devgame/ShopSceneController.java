@@ -4,12 +4,14 @@ package devgame;
 
 import GameExceptions.CharacterException;
 import GameExceptions.ItemException;
+import GameExceptions.WeaponException;
 import GameExceptions.YouDontHaveThatException;
 import Models.Inventory;
 import Models.Item;
 import Models.Player;
 import Models.Shop;
 import Models.ShopItem;
+import Models.Weapon;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -45,6 +47,7 @@ public class ShopSceneController implements Initializable, Observer {
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -101,6 +104,18 @@ public class ShopSceneController implements Initializable, Observer {
     @FXML
     private void close(ActionEvent event) {
         ((Stage) playerGold.getScene().getWindow()).close();
+    }
+
+    @FXML
+    private void upgradeWeapon(ActionEvent event) throws YouDontHaveThatException, ItemException, WeaponException {
+        if (inventory.hasItem("Mineral")) {
+            Item mineral = inventory.getItemNoRemoval("Mineral");
+            Weapon weapon = player.getCurrentWeapon();
+            if (mineral.getQuantity() >= weapon.getUpgradeCost()) {
+                inventory.removeItem(mineral, weapon.getUpgradeCost());
+                weapon.upgradeWeapon();
+            }
+        }
     }
 
 }

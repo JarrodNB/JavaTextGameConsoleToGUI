@@ -15,8 +15,8 @@
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <TextArea fx:id="textArea" editable="false" layoutX="27.0" layoutY="70.0" prefHeight="358.0" prefWidth="731.0" style="-fx-text-alignment: center;" wrapText="true" />
       <TextField id="commandField" fx:id="commandField" layoutX="318.0" layoutY="430.0" onKeyPressed="#submitCommand" promptText="Answer Puzzle" />
-      <Button fx:id="newGameButton" layoutX="22.0" layoutY="26.0" mnemonicParsing="false" onAction="#newGame" text="New Game" />
-      <Button fx:id="loadGameButton" layoutX="631.0" layoutY="26.0" mnemonicParsing="false" onAction="#loadGame" text="Load Game" />
+      <Button fx:id="newGameButton" layoutX="27.0" layoutY="26.0" mnemonicParsing="false" onAction="#newGame" text="New Game" />
+      <Button fx:id="loadGameButton" layoutX="681.0" layoutY="26.0" mnemonicParsing="false" onAction="#loadGame" text="Load Game" />
       <GridPane layoutX="27.0" layoutY="455.0" prefHeight="71.0" prefWidth="89.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -56,6 +56,6 @@
             <Label fx:id="playerEquipment" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <ListView fx:id="commandListView" layoutX="284.0" layoutY="463.0" onMouseClicked="#executeCommand" prefHeight="128.0" prefWidth="200.0" />
+      <ListView fx:id="commandListView" layoutX="293.0" layoutY="462.0" onMouseClicked="#executeCommand" prefHeight="128.0" prefWidth="200.0" />
     </children>
 </AnchorPane>
