@@ -50,6 +50,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -81,7 +82,7 @@ public class FXMLDocumentController implements Initializable, Observer {
     // Done add haslooked to room .. use as part of get room commands
     // No puzzles multiple choice
     // Done hp blink
-    // item right click to get description?
+    // Done item right click to get description?
     @FXML
     private Label label;
     @FXML
@@ -150,8 +151,7 @@ public class FXMLDocumentController implements Initializable, Observer {
     }
 
     private void sendText(String command) {
-        if (command == null){ // testing
-            System.out.println("null command");
+        if (command == null) {
             return;
         }
         StringBufferInputStream s = new StringBufferInputStream(command);
@@ -166,16 +166,15 @@ public class FXMLDocumentController implements Initializable, Observer {
         TextInputDialog dialog = new TextInputDialog("Player name");
         dialog.setContentText("Please enter a valid player name.");
         Optional<String> name = dialog.showAndWait();
+        Alert alert = new Alert(AlertType.ERROR);
         if (name.isPresent()) {
             String pName = name.get();
-            if (validateName(pName)) {
+            if (validateName(pName, alert)) {
                 player = createPlayer(pName);
                 startNewGame(player);
             } else {
-                Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Invalid Name");
                 alert.setHeaderText("Invalid player name");
-                alert.setContentText("Please use only letters.");
                 alert.showAndWait();
             }
         }
@@ -210,6 +209,8 @@ public class FXMLDocumentController implements Initializable, Observer {
     private void inventoryInteraction(MouseEvent event) {
         Item item = inventoryListView.getSelectionModel().getSelectedItem();
         if (item == null) {
+        } else if (event.getButton() == MouseButton.SECONDARY) {
+            System.out.println(item.getDescription());
         } else if (item instanceof Weapon) {
             try {
                 player.equipWeapon(item.getName());
@@ -264,18 +265,20 @@ public class FXMLDocumentController implements Initializable, Observer {
         playerEquipment.setText(player.getEquipment());
     }
 
-    private boolean validateName(String name) {
+    private boolean validateName(String name, Alert alert) {
         new File("C:\\Voyager\\").mkdir();
         if (name == null || name.equals("")) {
+            alert.setContentText("Name may not be blank.");
             return false;
-        } else if (name.matches("[a-zA-Z]+")) {
+        } else if (name.matches("[a-zA-Z ]+")) {
             File fileCheck = new File("C:\\Voyager\\" + name + ".dat");
             if (fileCheck.exists()) {
-                System.out.println("That name is taken.");
+                alert.setContentText("Player already exists.");
                 return false;
             }
             return true;
         } else {
+            alert.setContentText("Please use only letters.");
             return false;
         }
     }
@@ -315,7 +318,6 @@ public class FXMLDocumentController implements Initializable, Observer {
         try {
             fileStream = new FileInputStream(fileName);
         } catch (FileNotFoundException e2) {
-            System.out.println("That save game does not exist");
             return null;
         }
         ObjectInputStream inputStream = null;

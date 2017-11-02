@@ -18,9 +18,10 @@ public class DevGame extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GameScene.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Project Voyager");
         stage.show();
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override

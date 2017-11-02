@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="devgame.FXMLDocumentController">
+   <children>
+      <HBox layoutX="33.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="35.0" minWidth="900.0" prefHeight="35.0" prefWidth="900.0" AnchorPane.bottomAnchor="565.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="newGameButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="35.0" minWidth="90.0" mnemonicParsing="false" onAction="#newGame" prefHeight="35.0" prefWidth="90.0" text="New Game" />
+            <Button fx:id="loadGameButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="35.0" minWidth="90.0" mnemonicParsing="false" onAction="#loadGame" prefHeight="35.0" prefWidth="90.0" text="Load Game" />
+         </children>
+      </HBox>
+      <HBox layoutX="350.0" layoutY="183.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefWidth="800.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="35.0">
+         <children>
+            <TextArea fx:id="textArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefWidth="800.0" />
+         </children>
+      </HBox>
+      <HBox layoutX="350.0" layoutY="426.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="400.0">
+         <children>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="280.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.33334350585938" minWidth="10.0" prefWidth="83.33333587646484" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="219.3333282470703" minWidth="10.0" prefWidth="165.66666412353516" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Player:" />
+                  <Label fx:id="playerName" GridPane.columnIndex="1" />
+                  <Label text="HP:" GridPane.rowIndex="1" />
+                  <Label text="Gold:" GridPane.rowIndex="2" />
+                  <Label fx:id="playerHP" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="playerGold" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Attack:" GridPane.rowIndex="3" />
+                  <Label fx:id="playerAttack" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Defense:" GridPane.rowIndex="4" />
+                  <Label fx:id="playerDefense" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Equipment:" GridPane.rowIndex="5" />
+                  <Label fx:id="playerEquipment" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="50.0" top="10.0" />
+               </padding>
+            </GridPane>
+            <VBox minWidth="300.0" prefHeight="200.0" prefWidth="281.0">
+               <children>
+                  <TextField id="commandField" fx:id="commandField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#submitCommand" prefHeight="20.0" prefWidth="290.0" promptText="Answer Puzzle">
+                     <VBox.margin>
+                        <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <ListView fx:id="commandListView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#executeCommand" prefHeight="175.0" prefWidth="290.0">
+                     <VBox.margin>
+                        <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
+                     </VBox.margin>
+                  </ListView>
+               </children>
+            </VBox>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="265.0">
+               <children>
+                  <TextField editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="265.0" visible="false">
+                     <VBox.margin>
+                        <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <ListView fx:id="inventoryListView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#inventoryInteraction" prefHeight="175.0" prefWidth="265.0">
+                     <VBox.margin>
+                        <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
+                     </VBox.margin>
+                  </ListView>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
