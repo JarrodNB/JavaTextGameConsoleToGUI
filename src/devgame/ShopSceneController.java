@@ -25,11 +25,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author jnbcb
- */
 public class ShopSceneController implements Initializable, Observer {
 
     @FXML
@@ -45,12 +40,6 @@ public class ShopSceneController implements Initializable, Observer {
 
     private Shop shop;
 
-    /**
-     * Initializes the controller class.
-     *
-     * @param url
-     * @param rb
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

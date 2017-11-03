@@ -14,9 +14,6 @@ import java.util.logging.Logger;
 
 public class Inventory extends Observable implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 7184852803722533100L;
     private List<Item> inventory;
 
@@ -80,13 +77,13 @@ public class Inventory extends Observable implements Serializable {
             if (item.getName().equalsIgnoreCase(name)) {
                 Item itemResult = item;
                 removeItem(item, 1);
-                if (itemResult instanceof Weapon){
+                if (itemResult instanceof Weapon) {
                     try {
                         return new Weapon((Weapon) itemResult);
                     } catch (WeaponException ex) {
                         Logger.getLogger(Inventory.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } else if (itemResult instanceof Armor){
+                } else if (itemResult instanceof Armor) {
                     try {
                         return new Armor((Armor) itemResult);
                     } catch (ArmorException ex) {

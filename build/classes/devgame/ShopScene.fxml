@@ -3,30 +3,37 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="364.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="devgame.ShopSceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="devgame.ShopSceneController">
    <children>
-      <SplitPane dividerPositions="0.4898989898989899" prefHeight="400.0" prefWidth="365.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <ListView fx:id="buyListView" layoutX="-3.0" layoutY="20.0" onMouseClicked="#buyItem" prefHeight="353.0" prefWidth="182.0" />
-                  <Label layoutX="74.0" layoutY="6.0" text="Buy" />
-                  <Label layoutX="14.0" layoutY="376.0" text="Gold:" />
-                  <Label fx:id="playerGold" layoutX="46.0" layoutY="376.0" />
-                  <Button layoutX="97.0" layoutY="373.0" mnemonicParsing="false" onAction="#upgradeWeapon" text="Upgrade" />
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <ListView fx:id="sellListView" layoutY="20.0" onMouseClicked="#sellItem" prefHeight="353.0" prefWidth="182.0" />
-                  <Label layoutX="77.0" layoutY="6.0" text="Sell" />
-                  <Button layoutX="130.0" layoutY="372.0" mnemonicParsing="false" onAction="#close" text="Close" />
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Buy">
+            <content>
+              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="200.0">
+                     <children>
+                        <ListView fx:id="buyListView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#buyItem" prefHeight="275.0" prefWidth="200.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Sell">
+            <content>
+              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="200.0">
+                     <children>
+                        <ListView fx:id="sellListView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#sellItem" prefHeight="275.0" prefWidth="200.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Button layoutY="304.0" mnemonicParsing="false" onAction="#upgradeWeapon" text="Upgrade" />
+      <Button layoutX="155.0" layoutY="304.0" mnemonicParsing="false" onAction="#close" text="Close" />
+      <Label layoutX="62.0" layoutY="308.0" text="Gold:" />
+      <Label fx:id="playerGold" layoutX="100.0" layoutY="308.0" />
    </children>
 </AnchorPane>

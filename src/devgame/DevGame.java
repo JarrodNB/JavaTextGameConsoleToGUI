@@ -10,10 +10,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-/**
- *
- * @author jnbcb
- */
 public class DevGame extends Application {
 
     @Override
@@ -32,9 +28,6 @@ public class DevGame extends Application {
         stage.setResizable(false);
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         launch(args);
     }

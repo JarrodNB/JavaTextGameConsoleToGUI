@@ -48,9 +48,6 @@ public class RoomHandler {
             room.setHasLooked(true);
             displayRoomObjects(room);
             return null;
-        } else if (input.equalsIgnoreCase("open inventory")) {
-            OpenInventory.openInventory(room.getUniverse().getPlayer());
-            return null;
         } else if (input.startsWith("fight")) {
             if (room.getRoomMonster() != null && room.getRoomMonster().isInRoom()) {
                 room.getUniverse().setGameState("fight");
@@ -115,7 +112,6 @@ public class RoomHandler {
         } else if (input.equalsIgnoreCase("shop")) {
             if (room.containsShop()) {
                 room.getUniverse().setGameState("shop");
-                //Shopping.shop(room.getUniverse().getPlayer());
                 return null;
             } else {
                 System.out.println("There is no shop here. Are you blind?");

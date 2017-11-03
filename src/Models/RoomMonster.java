@@ -1,24 +1,20 @@
-
 package Models;
 
 import java.io.Serializable;
 
-public class RoomMonster extends RoomObject implements Serializable{
+public class RoomMonster extends RoomObject implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6727914882211017866L;
-	private Monster monster;
-	
-	public RoomMonster(Monster monster) {
-		super();
-		this.monster = monster;
-                isInRoom = true;
-	}
+    private static final long serialVersionUID = 6727914882211017866L;
+    private Monster monster;
 
-	public Monster getMonster() {
-		return monster;
-	}
-	
+    public RoomMonster(Monster monster) {
+        super();
+        this.monster = monster;
+        isInRoom = true;
+    }
+
+    public Monster getMonster() {
+        return monster;
+    }
+
 }

@@ -9,9 +9,6 @@ import GameExceptions.YouDontHaveThatException;
 
 public class Player extends Character implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 335996075941846318L;
     private Weapon currentWeapon;
     private Armor currentArmor;
@@ -23,8 +20,6 @@ public class Player extends Character implements Serializable {
     }
 
     public Weapon getCurrentWeapon() {
-        setChanged();
-        notifyObservers();
         return this.currentWeapon;
     }
 

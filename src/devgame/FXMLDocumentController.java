@@ -14,8 +14,10 @@ import Models.Weapon;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
@@ -45,6 +47,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
@@ -52,49 +55,21 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class FXMLDocumentController implements Initializable, Observer {
 
-    // DONE create player in controller and set into game engine. add observer when creating, then change a value to notify immedialty
-    // Done listview with all commands.... get list of possible commands from room for room. 
-    // Done universe .. gamestate in universe string fight, room, shop , openinventory ..... list view observes gamestate ... listview changes commands based on gamestate
-    // something wrong with upgrade and mineral? no?
-    // DONE player observable to updating after upgrading
-    // mechanic mention missing shop parts
-    // DONE lower rocket launcher upgrade
-    // DONE KRAKEN strengthen hard monsters ...
-    // DONE outside power plant is not showing stuff?
-    // add map button to show scene with map picture
-    // Done should be able to change gamestate from just roomhandler
-    // Done shop gamestate to launch scene
-    // fight scene .. pass monster and player
-    // Done change universe current room as i go room from room
-    // Done hp to red when low
-    // Fixed hitting load game then new game causes problems.... started 2 threads... // thread.stop();
-    // make variables volatile
-    // Done add inventory as observable and in update method if instance of inventory ... updated listview
-    // Done add haslooked to room .. use as part of get room commands
-    // No puzzles multiple choice
-    // Done hp blink
-    // Done item right click to get description?
-    @FXML
-    private Label label;
     @FXML
     private TextArea textArea;
     @FXML
     private TextField commandField;
 
     private PipedOutputStream outputStream;
-    @FXML
-    private Button newGameButton;
-    @FXML
-    private Button loadGameButton;
 
     private GameEngine engine;
 
@@ -120,6 +95,14 @@ public class FXMLDocumentController implements Initializable, Observer {
     private Label playerEquipment;
     @FXML
     private ListView<String> commandListView;
+    @FXML
+    private MenuButton fileMenu;
+    @FXML
+    private Button unequipWeaponButton;
+    @FXML
+    private Button unequipArmorButton;
+    @FXML
+    private AnchorPane pane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -136,6 +119,7 @@ public class FXMLDocumentController implements Initializable, Observer {
                 new KeyFrame(Duration.seconds(0.1), evt -> playerHP.setVisible(true)));
         timeLine.setCycleCount(Animation.INDEFINITE);
         commandField.setVisible(false);
+        new File("C:\\Voyager\\").mkdir();
     }
 
     @FXML
@@ -148,6 +132,7 @@ public class FXMLDocumentController implements Initializable, Observer {
 
     public void appendText(String str) {
         Platform.runLater(() -> textArea.appendText(str));
+
     }
 
     private void sendText(String command) {
@@ -181,20 +166,17 @@ public class FXMLDocumentController implements Initializable, Observer {
     }
 
     @FXML
-    private void loadGame(ActionEvent event) {
-        TextInputDialog dialog = new TextInputDialog("Load Game");
-        dialog.setContentText("Please the name of your hero.");
-        Optional<String> name = dialog.showAndWait();
-        if (name.isPresent()) {
-            String pName = name.get();
-            Universe universe = loadGameFile(pName);
-            if (universe != null) {
-                startLoadGame(universe);
+    private void loadGame(ActionEvent event) throws IOException {
+        FileChooser chooser = new FileChooser();
+        chooser.setInitialDirectory(new File("C:\\Voyager\\"));
+        File file = chooser.showOpenDialog(playerAttack.getScene().getWindow());
+        if (file != null) {
+            if (file.getName().endsWith(".dat")) {
+                startLoadGame(loadGameFile(file));
             } else {
                 Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Invalid Name");
-                alert.setHeaderText("Invalid player name");
-                alert.setContentText("Save file does not exist.");
+                alert.setTitle("Invalid File");
+                alert.setContentText("File must be a .dat file created by this game.");
                 alert.showAndWait();
             }
         }
@@ -246,14 +228,11 @@ public class FXMLDocumentController implements Initializable, Observer {
 
     private void fillPlayer() {
         playerName.setText(player.getName());
-
         if (player.getHealthPoints() < 10) {
             playerHP.setText(String.valueOf(player.getHealthPoints()));
-            playerHP.setTextFill(Color.web("#e00606"));
             timeLine.play();
         } else {
             playerHP.setText(String.valueOf(player.getHealthPoints()));
-            playerHP.setTextFill(Color.web("#000000"));
             if (timeLine != null) {
                 timeLine.stop();
                 playerHP.setVisible(true);
@@ -263,10 +242,20 @@ public class FXMLDocumentController implements Initializable, Observer {
         playerAttack.setText(String.valueOf(player.getCalcAttack()));
         playerDefense.setText(String.valueOf(player.getCalcDefense()));
         playerEquipment.setText(player.getEquipment());
+        if (player.getCurrentWeapon() != null) {
+            unequipWeaponButton.setVisible(true);
+        } else {
+            unequipWeaponButton.setVisible(false);
+        }
+        if (player.getCurrentArmor() != null) {
+            unequipArmorButton.setVisible(true);
+        } else {
+            unequipArmorButton.setVisible(false);
+        }
     }
 
     private boolean validateName(String name, Alert alert) {
-        new File("C:\\Voyager\\").mkdir();
+
         if (name == null || name.equals("")) {
             alert.setContentText("Name may not be blank.");
             return false;
@@ -312,11 +301,10 @@ public class FXMLDocumentController implements Initializable, Observer {
         thread.start();
     }
 
-    private Universe loadGameFile(String pName) {
-        String fileName = "C:\\Voyager\\" + pName + ".dat";
+    private Universe loadGameFile(File file) {
         FileInputStream fileStream = null;
         try {
-            fileStream = new FileInputStream(fileName);
+            fileStream = new FileInputStream(file);
         } catch (FileNotFoundException e2) {
             return null;
         }
@@ -408,7 +396,7 @@ public class FXMLDocumentController implements Initializable, Observer {
             Scene scene = new Scene(parent);
             stage.setResizable(false);
             stage.setScene(scene);
-            stage.initModality(Modality.APPLICATION_MODAL); // So you have to close shop before resuming game
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -418,5 +406,41 @@ public class FXMLDocumentController implements Initializable, Observer {
     private void fillCommandView(List<String> commands) {
         commandListView.getItems().clear();
         commandListView.getItems().addAll(commands);
+    }
+
+    @FXML
+    private void saveGame(ActionEvent event) {
+        FileOutputStream fileOut = null;
+        if (thread.isAlive()) {
+            Universe universe = engine.getUniverse();
+            try {
+                fileOut = new FileOutputStream("C:\\Voyager\\" + universe.getPlayer().getName() + ".dat");
+            } catch (FileNotFoundException e) {
+            }
+            ObjectOutputStream objectOut = null;
+            try {
+                objectOut = new ObjectOutputStream(fileOut);
+            } catch (IOException e) {
+            }
+            try {
+                objectOut.writeObject(universe);
+                System.out.println("Your game has been saved!");
+            } catch (IOException e) {
+            }
+        }
+    }
+
+    @FXML
+    private void unequipWeapon(ActionEvent event) throws ItemException {
+        if (player != null) {
+            player.unequipWeapon();
+        }
+    }
+
+    @FXML
+    private void unequipArmor(ActionEvent event) throws ItemException {
+        if (player != null) {
+            player.unequipArmor();
+        }
     }
 }

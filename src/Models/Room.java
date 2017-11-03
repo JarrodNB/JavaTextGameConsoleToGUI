@@ -7,9 +7,6 @@ import java.util.Map;
 
 public class Room implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -2488440222760396526L;
     private String name;
     private String description;
@@ -135,16 +132,15 @@ public class Room implements Serializable {
                     commands.add("Check " + roomItem.getContainerName());
                 });
             }
-            if (containsShop()){
+            if (containsShop()) {
                 commands.add("Shop");
             }
-            if (containsMechanic()){
+            if (containsMechanic()) {
                 commands.add("Mechanic");
             }
             getExits().entrySet().forEach((entry) -> {
                 commands.add("Go to " + entry.getKey());
             });
-            commands.add("Save");
         }
         return commands;
     }

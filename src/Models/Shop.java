@@ -8,9 +8,6 @@ import java.util.List;
 
 public class Shop implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 4431145987534145650L;
     private Map<String, Item> stock;
     private List<ShopItem> shopItems;

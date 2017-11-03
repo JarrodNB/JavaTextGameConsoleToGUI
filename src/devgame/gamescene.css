@@ -1,7 +1,50 @@
-/*
- * Empty Stylesheet file.
- */
 
 .mainFxmlClass {
 
+}
+
+.label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FF4136;
+}
+
+.root {
+    -fx-background-image: url("background.png");
+}
+
+.text-area {
+    -fx-background-color: transparent;
+}
+.text-area .text{
+    -fx-text-alignment: center;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+    -fx-text-alignment: center;
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+    -fx-text-alignment: center;
+}
+
+
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+    -fx-text-alignment: center;
+}
+
+
+.text-input {
+    -fx-text-fill: #FFFFFF;
+    -fx-text-alignment: center;
+    -fx-font-family: "Aclonica";
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.text-field {
+    -fx-text-fill: #39CCCC;
 }

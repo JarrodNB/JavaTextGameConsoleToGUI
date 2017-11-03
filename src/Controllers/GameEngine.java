@@ -3,7 +3,6 @@ package Controllers;
 import GameExceptions.CharacterException;
 import GameExceptions.ItemException;
 import GameExceptions.PlayerIsDeadException;
-import Models.Player;
 import Models.Universe;
 import java.io.Serializable;
 import java.util.NoSuchElementException;
@@ -15,11 +14,6 @@ public class GameEngine implements Serializable {
 
     private Universe universe = null;
     public static final Object LOCK = new Object();
-
-//    public static void main(String[] args) throws ItemException, CharacterException {
-//        GameEngine engine = new GameEngine();
-//        engine.start();
-//    }
 
     public static final String UNRECOGNIZED_COMMAND = "Command is not recognized.";
 
@@ -36,9 +30,7 @@ public class GameEngine implements Serializable {
             } catch (CharacterException ex) {
                 Logger.getLogger(GameEngine.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (ItemException ex) {
-            Logger.getLogger(GameEngine.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (CharacterException ex) {
+        } catch (ItemException | CharacterException ex) {
             Logger.getLogger(GameEngine.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -67,7 +59,7 @@ public class GameEngine implements Serializable {
         return this.universe;
     }
 
-    public void guiStart(Universe universe){
+    public void guiStart(Universe universe) {
         this.universe = universe;
         start(universe);
     }

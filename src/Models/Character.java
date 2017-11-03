@@ -9,9 +9,6 @@ import java.util.Observable;
 
 public class Character extends Observable implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 8505969773094231323L;
     private String name;
     private int maxHealth;

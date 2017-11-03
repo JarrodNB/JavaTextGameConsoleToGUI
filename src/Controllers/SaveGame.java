@@ -1,4 +1,3 @@
-
 package Controllers;
 
 import java.io.FileNotFoundException;
@@ -11,24 +10,21 @@ import Models.Universe;
 
 public class SaveGame {
 
-	public static void save(Universe universe, Room room) {
-		universe.setCurrentRoom(room);
-		FileOutputStream fileOut = null;
-		try {
-			fileOut = new FileOutputStream("C:\\Voyager\\" + universe.getPlayer().getName() + ".dat");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-        ObjectOutputStream objectOut = null;
-		try {
-			objectOut = new ObjectOutputStream(fileOut);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    public static void save(Universe universe, Room room) {
+        universe.setCurrentRoom(room);
+        FileOutputStream fileOut = null;
         try {
-			objectOut.writeObject(universe);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+            fileOut = new FileOutputStream("C:\\Voyager\\" + universe.getPlayer().getName() + ".dat");
+        } catch (FileNotFoundException e) {
+        }
+        ObjectOutputStream objectOut = null;
+        try {
+            objectOut = new ObjectOutputStream(fileOut);
+        } catch (IOException e) {
+        }
+        try {
+            objectOut.writeObject(universe);
+        } catch (IOException e) {
+        }
+    }
 }

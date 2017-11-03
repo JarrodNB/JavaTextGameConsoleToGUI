@@ -26,7 +26,7 @@ public class GameItems {
 
     public static Armor getLawEnforcementGear(int quantity) {
         try {
-            return new Armor(0, "Law Enforcement Gear", "Protective gear worn by colony law enforcement, it offers decent protection", 400, quantity, 3);
+            return new Armor(0, "Law Enforcement Gear", "Protective gear worn by colony law enforcement. It offers decent protection", 1000, quantity, 3);
         } catch (ItemException | ArmorException e) {
             System.out.println(e.getMessage());
             return null;
@@ -35,7 +35,7 @@ public class GameItems {
 
     public static Armor getMilitaryGear(int quantity) {
         try {
-            return new Armor(0, "Military Gear", "Protective gear worn by colony law military officers, it offers good protection", 700, quantity, 5);
+            return new Armor(0, "Military Gear", "Protective gear worn by colony law military officers, it offers good protection", 2000, quantity, 5);
         } catch (ItemException | ArmorException e) {
             System.out.println(e.getMessage());
             return null;
@@ -44,7 +44,7 @@ public class GameItems {
 
     public static Weapon getPlasmaKnife(int quantity) {
         try {
-            return new Weapon(0, "Plasma Knife", "Very common self-defense weap-on popular among colonists.", 50, quantity, 1, 1);
+            return new Weapon(0, "Plasma Knife", "Very common self-defense weapon popular among colonists.", 50, quantity, 1, 1);
         } catch (ItemException | WeaponException e) {
             System.out.println(e.getMessage());
             return null;
@@ -71,7 +71,7 @@ public class GameItems {
 
     public static Weapon getLaserRifle(int quantity) {
         try {
-            return new Weapon(0, "Laser Rifle", "Military grade weaponry used by colony militia’s. Expensive.", 800, quantity, 7, 5);
+            return new Weapon(0, "Laser Rifle", "Military grade weaponry used by colony militia’s. Expensive.", 800, quantity, 7, 3);
         } catch (ItemException | WeaponException e) {
             System.out.println(e.getMessage());
             return null;
@@ -80,7 +80,7 @@ public class GameItems {
 
     public static Weapon getRocketLauncher(int quantity) {
         try {
-            return new Weapon(0, "Rocket Launcher", "Very powerful weapon only used by highly trained soldiers. The limited availability of this weapon makes it expensive in shops.", 2000, quantity, 9, 6);
+            return new Weapon(0, "Rocket Launcher", "Very powerful weapon only used by highly trained soldiers. The limited availability of this weapon makes it expensive in shops.", 2000, quantity, 9, 3);
         } catch (ItemException | WeaponException e) {
             System.out.println(e.getMessage());
             return null;
@@ -194,8 +194,8 @@ public class GameItems {
         list.add(getWings());
         return list;
     }
-    
-    public static List<ShopItem> getShopItems(){
+
+    public static List<ShopItem> getShopItems() {
         List<ShopItem> list = new ArrayList<>();
         list.add(new ShopItem(getMedicine(1)));
         list.add(new ShopItem(getElixir(1)));
@@ -207,7 +207,7 @@ public class GameItems {
         list.add(new ShopItem(getRocketLauncher(1)));
         list.add(new ShopItem(getPilotSuit(1)));
         list.add(new ShopItem(getLawEnforcementGear(1)));
-        list.add(new ShopItem(getMilitaryGear(1)));       
+        list.add(new ShopItem(getMilitaryGear(1)));
         return list;
     }
 

@@ -2,7 +2,7 @@ package Models;
 
 import java.io.Serializable;
 
-public class RoomObject implements Serializable{
+public class RoomObject implements Serializable {
 
     public boolean isInRoom;
 
