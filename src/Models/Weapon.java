@@ -15,8 +15,8 @@ public class Weapon extends Item implements Serializable {
     private int upgradeAmount;
     private int upgradeLevel;
     private int upgradeCost;
-    private static int COST_INCREASE = 1;
-    private static int LEVEL_INCREASE = 1;
+    private static final int COST_INCREASE = 1;
+    private static  final int LEVEL_INCREASE = 1;
 
     public Weapon(int id, String name, String description, int buyValue, int quantity, int attack,
             int upgradeAmount) throws WeaponException, ItemException {
@@ -30,6 +30,8 @@ public class Weapon extends Item implements Serializable {
     public Weapon(Weapon weapon) throws WeaponException, ItemException {
         this(weapon.getId(), weapon.getName(), weapon.getDescription(), weapon.getBuyValue(), 1,
                 weapon.getAttack(), weapon.getUpgradeAmount());
+        weapon.setUpgradeLevel(weapon.getUpgradeLevel());
+        weapon.setUpgradeCost(weapon.getUpgradeCost());
     }
 
     public int getAttack() {
@@ -48,9 +50,9 @@ public class Weapon extends Item implements Serializable {
         return upgradeCost;
     }
 
-    private void setAttack(int attack) throws WeaponException {
+    public void setAttack(int attack) throws WeaponException {
         if (attack < 1) {
-            throw new WeaponException("weapon attack must be atleast 1" + getClass().getSimpleName());
+            //throw new WeaponException("weapon attack must be atleast 1" + getClass().getSimpleName());
         }
         this.attack = attack;
     }
@@ -79,7 +81,7 @@ public class Weapon extends Item implements Serializable {
     public void upgradeWeapon() throws WeaponException {
         setAttack(getAttack() + getUpgradeAmount());
         setUpgradeCost(getUpgradeCost() + Weapon.COST_INCREASE);
-        setUpgradeLevel(getUpgradeAmount() + Weapon.LEVEL_INCREASE);
+        setUpgradeLevel(getUpgradeLevel() + Weapon.LEVEL_INCREASE);
     }
 
     @Override

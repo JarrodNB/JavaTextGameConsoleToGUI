@@ -27,7 +27,7 @@ public class Inventory extends Observable implements Serializable {
 
     public boolean hasItem(String itemName) {
         for (Item inventoryItem : inventory) {
-            if (inventoryItem.getName().equalsIgnoreCase(itemName) && inventoryItem.getQuantity() > 0) { // shouldnt need quantity
+            if (inventoryItem.getName().equalsIgnoreCase(itemName)) {
                 return true;
             }
         }
@@ -38,10 +38,24 @@ public class Inventory extends Observable implements Serializable {
         for (int index = 0; index < inventory.size(); index++) {
             Item inventoryItem = inventory.get(index);
             if (item.getName().equals(inventoryItem.getName())) {
-                inventoryItem.setQuantity(inventoryItem.getQuantity() + item.getQuantity());
-                hasChanged();
-                notifyObservers();
-                return;
+                if (item instanceof Weapon) {
+                    if (((Weapon) item).getAttack() != ((Weapon) inventoryItem).getAttack()) {
+                        inventory.add(item);
+                        hasChanged();
+                        notifyObservers();
+                        return;
+                    } else {
+                        inventoryItem.setQuantity(inventoryItem.getQuantity() + item.getQuantity());
+                        hasChanged();
+                        notifyObservers();
+                        return;
+                    }
+                } else {
+                    inventoryItem.setQuantity(inventoryItem.getQuantity() + item.getQuantity());
+                    hasChanged();
+                    notifyObservers();
+                    return;
+                }
             }
         }
         hasChanged();
@@ -50,6 +64,7 @@ public class Inventory extends Observable implements Serializable {
     }
 
     public void removeItem(Item item, int quantity) throws YouDontHaveThatException, ItemException {
+        System.out.println("removing " + quantity + " of " + item.getName());
         for (int index = 0; index < inventory.size(); index++) {
             Item inventoryItem = inventory.get(index);
             if (inventoryItem.getName().equalsIgnoreCase(item.getName())) {

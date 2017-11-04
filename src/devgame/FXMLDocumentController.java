@@ -103,7 +103,12 @@ public class FXMLDocumentController implements Initializable, Observer {
     private Button unequipArmorButton;
     @FXML
     private AnchorPane pane;
-
+    
+    // add sound
+    // add help to menu
+    // rearrange exits so previous room is last
+    // problem with upgrade ... not refreshinng
+    // unequipping weapon loses upgrade
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         OutputStream out = new OutputStream() {
@@ -391,7 +396,7 @@ public class FXMLDocumentController implements Initializable, Observer {
             FXMLLoader root = new FXMLLoader(getClass().getResource("ShopScene.fxml"));
             Parent parent = (Pane) root.load();
             ShopSceneController controller = root.<ShopSceneController>getController();
-            controller.init(player);
+            controller.init(player, player.getInventory(), this);
             Stage stage = new Stage();
             Scene scene = new Scene(parent);
             stage.setResizable(false);
@@ -411,7 +416,7 @@ public class FXMLDocumentController implements Initializable, Observer {
     @FXML
     private void saveGame(ActionEvent event) {
         FileOutputStream fileOut = null;
-        if (thread.isAlive()) {
+        if (thread != null && thread.isAlive()) {
             Universe universe = engine.getUniverse();
             try {
                 fileOut = new FileOutputStream("C:\\Voyager\\" + universe.getPlayer().getName() + ".dat");
@@ -420,9 +425,6 @@ public class FXMLDocumentController implements Initializable, Observer {
             ObjectOutputStream objectOut = null;
             try {
                 objectOut = new ObjectOutputStream(fileOut);
-            } catch (IOException e) {
-            }
-            try {
                 objectOut.writeObject(universe);
                 System.out.println("Your game has been saved!");
             } catch (IOException e) {

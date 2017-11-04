@@ -5,7 +5,10 @@ import java.io.Serializable;
 import DataStorage.GameItems;
 import GameExceptions.CharacterException;
 import GameExceptions.ItemException;
+import GameExceptions.WeaponException;
 import GameExceptions.YouDontHaveThatException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Player extends Character implements Serializable {
 

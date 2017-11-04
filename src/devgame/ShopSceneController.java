@@ -39,16 +39,18 @@ public class ShopSceneController implements Initializable, Observer {
     private Inventory inventory;
 
     private Shop shop;
+    private Observer observer;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
     }
 
-    public void init(Player player) {
+    public void init(Player player, Inventory inventory, Observer observer) {
+        this.observer = observer;
         this.player = player;
         player.addObserver(this);
-        inventory = player.getInventory();
+        this.inventory = inventory;
         inventory.addObserver(this);
         shop = new Shop();
         buyListView.getItems().addAll(shop.getShopItems());
@@ -97,12 +99,17 @@ public class ShopSceneController implements Initializable, Observer {
 
     @FXML
     private void upgradeWeapon(ActionEvent event) throws YouDontHaveThatException, ItemException, WeaponException {
+        Weapon weapon = player.getCurrentWeapon();
+        if (weapon == null){
+            return;
+        }
         if (inventory.hasItem("Mineral")) {
             Item mineral = inventory.getItemNoRemoval("Mineral");
-            Weapon weapon = player.getCurrentWeapon();
             if (mineral.getQuantity() >= weapon.getUpgradeCost()) {
                 inventory.removeItem(mineral, weapon.getUpgradeCost());
                 weapon.upgradeWeapon();
+                (this).update(null, null);
+                observer.update(null, null);
             }
         }
     }

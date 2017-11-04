@@ -26,7 +26,7 @@ public class GameItems {
 
     public static Armor getLawEnforcementGear(int quantity) {
         try {
-            return new Armor(0, "Law Enforcement Gear", "Protective gear worn by colony law enforcement. It offers decent protection", 1000, quantity, 3);
+            return new Armor(0, "Law Enforcement Gear", "Protective gear worn by colony law enforcement. It offers decent protection", 1400, quantity, 3);
         } catch (ItemException | ArmorException e) {
             System.out.println(e.getMessage());
             return null;
@@ -35,7 +35,7 @@ public class GameItems {
 
     public static Armor getMilitaryGear(int quantity) {
         try {
-            return new Armor(0, "Military Gear", "Protective gear worn by colony law military officers, it offers good protection", 2000, quantity, 5);
+            return new Armor(0, "Military Gear", "Protective gear worn by colony law military officers, it offers good protection", 2200, quantity, 5);
         } catch (ItemException | ArmorException e) {
             System.out.println(e.getMessage());
             return null;
@@ -53,7 +53,7 @@ public class GameItems {
 
     public static Weapon getPlasmaSword(int quantity) {
         try {
-            return new Weapon(0, "Plasma Sword", "Old weapon mainly found in museums around the colony, no longer common place but more powerful than the knife.", 250, quantity, 3, 2);
+            return new Weapon(0, "Plasma Sword", "Old weapon mainly found in museums around the colony, no longer common place but more powerful than the knife.", 400, quantity, 3, 2);
         } catch (ItemException | WeaponException e) {
             System.out.println(e.getMessage());
             return null;
@@ -62,7 +62,7 @@ public class GameItems {
 
     public static Weapon getPlasmaPistol(int quantity) {
         try {
-            return new Weapon(0, "Plasma Pistol", "Inexpensive gun used by colony law enforcement to protect from space pirates. Easy to find in shops.", 400, quantity, 5, 3);
+            return new Weapon(0, "Plasma Pistol", "Inexpensive gun used by colony law enforcement to protect from space pirates. Easy to find in shops.", 700, quantity, 5, 3);
         } catch (ItemException | WeaponException e) {
             System.out.println(e.getMessage());
             return null;
@@ -71,7 +71,7 @@ public class GameItems {
 
     public static Weapon getLaserRifle(int quantity) {
         try {
-            return new Weapon(0, "Laser Rifle", "Military grade weaponry used by colony militia’s. Expensive.", 800, quantity, 7, 3);
+            return new Weapon(0, "Laser Rifle", "Military grade weaponry used by colony militia’s. Expensive.", 1200, quantity, 7, 3);
         } catch (ItemException | WeaponException e) {
             System.out.println(e.getMessage());
             return null;
@@ -80,7 +80,7 @@ public class GameItems {
 
     public static Weapon getRocketLauncher(int quantity) {
         try {
-            return new Weapon(0, "Rocket Launcher", "Very powerful weapon only used by highly trained soldiers. The limited availability of this weapon makes it expensive in shops.", 2000, quantity, 9, 3);
+            return new Weapon(0, "Rocket Launcher", "Very powerful weapon only used by highly trained soldiers. The limited availability of this weapon makes it expensive in shops.", 2200, quantity, 9, 3);
         } catch (ItemException | WeaponException e) {
             System.out.println(e.getMessage());
             return null;
@@ -107,7 +107,7 @@ public class GameItems {
 
     public static Item getMineral(int quantity) {
         try {
-            return new Item(2, "Mineral", "Resource found mainly on mining colonies. Used to make materials.", 700, quantity);
+            return new Item(2, "Mineral", "Resource found mainly on mining colonies. Used to make materials.", 1000, quantity);
         } catch (ItemException e) {
             System.out.println(e.getMessage());
             return null;

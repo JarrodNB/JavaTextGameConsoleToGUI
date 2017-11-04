@@ -5,15 +5,15 @@ import Models.Puzzle;
 public class GamePuzzles {
 
     public static Puzzle getFirstPuzzle() {
-        return new Puzzle(0, "What are Saturn’s Rings made of?", "Ice", "Dust, Ice, or Boron", GameItems.getLaserRifle(1), 0);
+        return new Puzzle(0, "What are Saturn’s Rings made of?", "Ice", "Dust, Ice, or Boron", GameItems.getPlasmaPistol(1), 1);
     }
 
     public static Puzzle getSecondPuzzle() {
-        return new Puzzle(1, "True or False: Saturn is less dense than water.", "True", "Saturn can float on water", null, 100);
+        return new Puzzle(1, "True or False: Saturn is less dense than water.", "True", "Saturn can float on water", null, 150);
     }
 
     public static Puzzle getThirdPuzzle() {
-        return new Puzzle(2, "Saturn was Discovered by?", "Galileo", "Isaac Newton, Copernicus, or Galileo", GameItems.getElixir(1), 0);
+        return new Puzzle(2, "Saturn was Discovered by?", "Galileo", "Isaac Newton, Copernicus, or Galileo", GameItems.getElixir(1), 100);
     }
 
     public static Puzzle getFourthPuzzle() {
@@ -21,7 +21,7 @@ public class GamePuzzles {
     }
 
     public static Puzzle getFifthPuzzle() {
-        return new Puzzle(4, "Sometimes I’m full, but I never overflow. What am I?", "The moon", "Not the sun", null, 100);
+        return new Puzzle(4, "Sometimes I’m full, but I never overflow. What am I?", "The moon", "Not the sun", null, 150);
     }
 
     public static Puzzle getSixthPuzzle() {
@@ -37,10 +37,10 @@ public class GamePuzzles {
     }
 
     public static Puzzle getNinthPuzzle() {
-        return new Puzzle(8, "How many days does it take mercenary to orbit the sun?", "88", "I ate and ate", null, 100);
+        return new Puzzle(8, "How many days does it take mercenary to orbit the sun?", "88", "I ate and ate", null, 200);
     }
 
     public static Puzzle getTenthPuzzle() {
-        return new Puzzle(9, "True or False: The Grand Canyon is the biggest canyon in the solar system.", "False", "There is a grander canyon", null, 100);
+        return new Puzzle(9, "True or False: The Grand Canyon is the biggest canyon in the solar system.", "False", "There is a grander canyon", null, 150);
     }
 }

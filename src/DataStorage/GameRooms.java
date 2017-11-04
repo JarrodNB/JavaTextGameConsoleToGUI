@@ -14,9 +14,9 @@ import Models.RoomPuzzle;
 public class GameRooms {
 
     public static Room getCrashSite() {
-        String description = "You wake up in a forest, dazed but uninjured. You stand up and look at your ship, which is missing many of it’s vital pieces"
+        String description = "You wake up in a forest, dazed but uninjured. You stand up and look at your ship, which is missing many of it's vital pieces"
                 + " from your encounter with a band of space pirates. There is no way that the ship "
-                + "can fly in it’s current condition, so you must find another way to get off this pla"
+                + "can fly in it's current condition, so you must find another way to get off this pla"
                 + "net. To the north, there appears to be a building, so maybe it would be best to investigate.";
         List<RoomItem> roomItems = null;
         RoomMonster roomMonster = new RoomMonster(GameMonsters.getWornoutRobot(GameItems.getElixir(1), 0));
@@ -68,7 +68,7 @@ public class GameRooms {
         String description = "Upon exiting the portal, you enter a base located on the moon. The room is filled with"
                 + " 4 portals labelled Mercury, Venus, Earth, and Mars."
                 + " There is also a shop keeper there, who looks at you, hoping that you came to buy something. Try typing shop to interact with him."
-                + "Your ship mechanic has also set up here. Perhaps you should talk to him by typing mechanic.";
+                + "Your ship mechanic has also set up here. Perhaps you should talk to him.";
         List<RoomItem> roomItems = null;
         RoomMonster roomMonster = null;
         RoomPuzzle roomPuzzle = null;
@@ -281,7 +281,7 @@ public class GameRooms {
                 + " You can’t see them clearly because of the monster blocking your way. Better kill it first.";
         List<RoomItem> roomItems = new ArrayList<>();
         roomItems.add(new RoomItem(GameItems.getMedicine(1), "Barrel"));
-        roomItems.add(new RoomItem(GameItems.getLaserRifle(1), "Hole"));
+        roomItems.add(new RoomItem(GameItems.getPlasmaSword(1), "Hole"));
         RoomMonster roomMonster = new RoomMonster(GameMonsters.getFireGiant(null, 200));
         RoomPuzzle roomPuzzle = new RoomPuzzle(GamePuzzles.getFourthPuzzle());
         RoomGold roomGold = null;
@@ -317,7 +317,7 @@ public class GameRooms {
         roomItems.add(new RoomItem(GameItems.getMedicine(1), "Bag"));
         RoomMonster roomMonster = null;
         RoomPuzzle roomPuzzle = null;
-        RoomGold roomGold = new RoomGold(100, "Cabinet");
+        RoomGold roomGold = new RoomGold(200, "Cabinet");
         Map<String, Boolean> exits = new HashMap<String, Boolean>();
         exits.put("Mars Surface", false);
         Room room = new Room("Wasteland", description, roomItems, roomMonster, roomPuzzle, roomGold);
@@ -347,7 +347,7 @@ public class GameRooms {
                 + "yacht on the corner to get to the white house for surprises."
                 + " On the left side, we have the rock covered tomb. Be adventurous to find hidden stuff!!";
         List<RoomItem> roomItems = new ArrayList<>();
-        roomItems.add(new RoomItem(GameItems.getLaserRifle(1), "Hole"));
+        roomItems.add(new RoomItem(GameItems.getPlasmaSword(1), "Hole"));
         roomItems.add(new RoomItem(GameItems.getMedicine(1), "Bag"));
         RoomMonster roomMonster = null;
         RoomPuzzle roomPuzzle = new RoomPuzzle(GamePuzzles.getEighthPuzzle());
@@ -365,7 +365,7 @@ public class GameRooms {
                 + " filled with pools and church. WATCH OUT!! There is something you could get harmed by.";
         List<RoomItem> roomItems = new ArrayList<>();
         roomItems.add(new RoomItem(GameItems.getMedicine(1), "Storage Container"));
-        RoomMonster roomMonster = new RoomMonster(GameMonsters.getRuffians(null, 100));
+        RoomMonster roomMonster = new RoomMonster(GameMonsters.getRuffians(null, 150));
         RoomPuzzle roomPuzzle = null;
         RoomGold roomGold = new RoomGold(100, "Cabinet");
         Map<String, Boolean> exits = new HashMap<String, Boolean>();
@@ -446,7 +446,7 @@ public class GameRooms {
                 + " to the inside of the room, and a few parts appear to be missing.";
         List<RoomItem> roomItems = new ArrayList<>();
         roomItems.add(new RoomItem(GameItems.getMedicine(2), "Storage Container"));
-        RoomMonster roomMonster = new RoomMonster(GameMonsters.getFireGiant(GameItems.getEngine(), 100));
+        RoomMonster roomMonster = new RoomMonster(GameMonsters.getFireGiant(GameItems.getEngine(), 250));
         RoomPuzzle roomPuzzle = null;
         RoomGold roomGold = null;
         Map<String, Boolean> exits = new HashMap<String, Boolean>();
