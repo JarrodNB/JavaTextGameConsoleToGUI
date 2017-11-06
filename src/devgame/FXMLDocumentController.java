@@ -107,8 +107,7 @@ public class FXMLDocumentController implements Initializable, Observer {
     // add sound
     // add help to menu
     // rearrange exits so previous room is last
-    // problem with upgrade ... not refreshinng
-    // unequipping weapon loses upgrade
+    // add min and max sizes.. go by a percentage?
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         OutputStream out = new OutputStream() {
@@ -226,9 +225,10 @@ public class FXMLDocumentController implements Initializable, Observer {
         Platform.runLater(() -> fillPlayer());
         if (arg != null) {
             updateCommands((String) arg, (Universe) o);
+            commandField.setVisible(false);
         }
         Platform.runLater(() -> updateInventory());
-        commandField.setVisible(false);
+        
     }
 
     private void fillPlayer() {

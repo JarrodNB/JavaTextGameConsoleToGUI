@@ -64,7 +64,6 @@ public class Inventory extends Observable implements Serializable {
     }
 
     public void removeItem(Item item, int quantity) throws YouDontHaveThatException, ItemException {
-        System.out.println("removing " + quantity + " of " + item.getName());
         for (int index = 0; index < inventory.size(); index++) {
             Item inventoryItem = inventory.get(index);
             if (inventoryItem.getName().equalsIgnoreCase(item.getName())) {
