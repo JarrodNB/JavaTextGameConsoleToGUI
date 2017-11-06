@@ -64,7 +64,7 @@ public class ShopSceneController implements Initializable, Observer {
             return;
         }
         if (item.getBuyValue() > player.getGold()) {
-
+            PopUp.launch("You do not have enough gold.");
         } else {
             player.setGold(player.getGold() - item.getBuyValue());
             inventory.addItem(item.getItem());
@@ -74,7 +74,10 @@ public class ShopSceneController implements Initializable, Observer {
     @FXML
     private void sellItem(MouseEvent event) throws YouDontHaveThatException, ItemException, CharacterException {
         Item item = sellListView.getSelectionModel().getSelectedItem();
-        if (item == null || item.getId() > 2) {
+        if (item == null) {
+            return;
+        } else if ( item.getId() > 2){
+            PopUp.launch("You can not sell ship parts.");
             return;
         }
         inventory.removeItem(item, 1);
@@ -101,6 +104,7 @@ public class ShopSceneController implements Initializable, Observer {
     private void upgradeWeapon(ActionEvent event) throws YouDontHaveThatException, ItemException, WeaponException {
         Weapon weapon = player.getCurrentWeapon();
         if (weapon == null){
+            PopUp.launch("You do not have a weapon equipped.");
             return;
         }
         if (inventory.hasItem("Mineral")) {
@@ -110,7 +114,11 @@ public class ShopSceneController implements Initializable, Observer {
                 weapon.upgradeWeapon();
                 (this).update(null, null);
                 observer.update(null, null);
+            } else {
+                PopUp.launch("You do not have enough minerals. You need " + weapon.getUpgradeCost() + ".");
             }
+        } else {
+            PopUp.launch("You do not have any minerals.");
         }
     }
 

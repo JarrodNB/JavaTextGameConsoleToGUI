@@ -29,8 +29,10 @@
                 <MenuItem mnemonicParsing="false" onAction="#newGame" styleClass="menu-button" text="New Game" />
                 <MenuItem mnemonicParsing="false" onAction="#loadGame" styleClass="menu-button" text="Load Game" />
                   <MenuItem mnemonicParsing="false" onAction="#saveGame" styleClass="menu-button" text="Save Game" />
+                  <MenuItem mnemonicParsing="false" onAction="#displayHelp" styleClass="menu-button" text="Help" />
               </items>
             </MenuButton>
+            <Button mnemonicParsing="false" onAction="#launchLog" text="Log" />
          </children>
       </HBox>
       <HBox layoutX="350.0" layoutY="183.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefWidth="800.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="35.0">

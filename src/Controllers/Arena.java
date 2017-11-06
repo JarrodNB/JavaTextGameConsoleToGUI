@@ -18,7 +18,6 @@ public class Arena {
         System.out.println("You have entered into a fight with " + monster.getName() + ".");
         try {
             while (true) {
-                System.out.println("Will you attack, defend, open inventory, or retreat?");
                 String userInput = GameEngine.nextLine().toLowerCase();
                 if (userInput.equals("retreat")) {
                     monster.heal(monster.getMaxHealth());
@@ -55,7 +54,6 @@ public class Arena {
         } else {
             System.out.println(monster.getName() + " attacked you and did " + playerDamage + " damage!");
             player.takeDamage(playerDamage);
-            System.out.println("You now have " + player.getHealthPoints() + " hp.");
         }
     }
 

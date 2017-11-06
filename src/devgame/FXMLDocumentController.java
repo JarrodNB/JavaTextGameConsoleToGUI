@@ -104,10 +104,13 @@ public class FXMLDocumentController implements Initializable, Observer {
     @FXML
     private AnchorPane pane;
     
+    private int clearCount = 0;
+    
+    private TextArea gamelog = new TextArea();
+    
     // add sound
     // add help to menu
     // rearrange exits so previous room is last
-    // add min and max sizes.. go by a percentage?
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         OutputStream out = new OutputStream() {
@@ -136,12 +139,20 @@ public class FXMLDocumentController implements Initializable, Observer {
 
     public void appendText(String str) {
         Platform.runLater(() -> textArea.appendText(str));
+        Platform.runLater(() -> gamelog.appendText(str));
 
     }
 
     private void sendText(String command) {
         if (command == null) {
             return;
+        }
+        textArea.appendText("\n");
+        gamelog.appendText(command + "\n");
+        clearCount++;
+        if (clearCount >= 3) {
+            textArea.clear();
+            clearCount = 0;
         }
         StringBufferInputStream s = new StringBufferInputStream(command);
         System.setIn(s);
@@ -216,7 +227,7 @@ public class FXMLDocumentController implements Initializable, Observer {
                 UseItem.useItem(player, item.getName());
             }
         } else {
-            System.out.println("That can't be used");
+            System.out.println("That can't be used.");
         }
     }
 
@@ -444,5 +455,32 @@ public class FXMLDocumentController implements Initializable, Observer {
         if (player != null) {
             player.unequipArmor();
         }
+    }
+
+    @FXML
+    private void launchLog(ActionEvent event) {
+        Stage stage = new Stage();
+        AnchorPane anchor = new AnchorPane();
+        anchor.getChildren().add(gamelog);
+        gamelog.setWrapText(true);
+        gamelog.setMinWidth(800);
+        gamelog.setMinHeight(300);
+        Scene scene = new Scene(anchor, 800, 300);
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+    }
+
+    @FXML
+    private void displayHelp(ActionEvent event) {
+        String help = "Select new game or load game to begin.\n"
+                + "Available commands will be listed for you to use.\n"
+                + "Your inventory can be accessed by clicking on the listed items.\n"
+                + "Left clicking will use or equip an item. Right clicking will display the description.\n"
+                + "Items can be bought and sold in the shop. Weapons can also be upgraded in the shop\n"
+                + "A log is kept off everything that can be viewed by using the log button.\n"
+                + "The game is won when you have gathered all the ship parts.";
+        System.out.println(help);
+                
     }
 }

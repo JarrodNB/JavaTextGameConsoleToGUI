@@ -25,7 +25,7 @@ public class DevGame extends Application {
                 System.exit(0);
             }
         });
-        stage.setResizable(false);
+        //stage.setResizable(false);
     }
 
     public static void main(String[] args) {
