@@ -69,8 +69,6 @@ public class FXMLDocumentController implements Initializable, Observer {
     @FXML
     private TextField commandField;
 
-    private PipedOutputStream outputStream;
-
     private GameEngine engine;
 
     private Player player;
@@ -106,11 +104,12 @@ public class FXMLDocumentController implements Initializable, Observer {
     
     private int clearCount = 0;
     
-    private TextArea gamelog = new TextArea();
+    private final TextArea gamelog = new TextArea();
     
     // add sound
-    // add help to menu
     // rearrange exits so previous room is last
+    // start commenting
+    // space in name
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         OutputStream out = new OutputStream() {
@@ -180,6 +179,11 @@ public class FXMLDocumentController implements Initializable, Observer {
         }
     }
 
+    /**
+     * 
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void loadGame(ActionEvent event) throws IOException {
         FileChooser chooser = new FileChooser();
@@ -465,6 +469,7 @@ public class FXMLDocumentController implements Initializable, Observer {
         gamelog.setWrapText(true);
         gamelog.setMinWidth(800);
         gamelog.setMinHeight(300);
+        gamelog.setEditable(false);
         Scene scene = new Scene(anchor, 800, 300);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -481,6 +486,5 @@ public class FXMLDocumentController implements Initializable, Observer {
                 + "A log is kept off everything that can be viewed by using the log button.\n"
                 + "The game is won when you have gathered all the ship parts.";
         System.out.println(help);
-                
     }
 }

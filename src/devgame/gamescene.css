@@ -4,10 +4,10 @@
 }
 
 .label {
-    -fx-font-size: 12px;
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-text-fill: #FF4136;
-    -fx-fill: FIREBRICK;
+    -fx-text-fill: white;
+    -fx-fill: whitesmoke;
     -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
 

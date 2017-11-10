@@ -80,7 +80,7 @@ public class GameItems {
 
     public static Weapon getRocketLauncher(int quantity) {
         try {
-            return new Weapon(0, "Rocket Launcher", "Very powerful weapon only used by highly trained soldiers. The limited availability of this weapon makes it expensive in shops.", 2200, quantity, 9, 3);
+            return new Weapon(0, "Rocket Launcher", "Very powerful weapon only used by highly trained soldiers. The limited availability of this weapon makes it expensive in shops.", 2200, quantity, 9, 4);
         } catch (ItemException | WeaponException e) {
             System.out.println(e.getMessage());
             return null;

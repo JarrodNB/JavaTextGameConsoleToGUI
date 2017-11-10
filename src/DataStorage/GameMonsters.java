@@ -69,7 +69,7 @@ public class GameMonsters {
                 inventory = new Inventory();
                 inventory.addItem(item);
             }
-            return new Monster("Kraken", "Huge green sea creature that resides in an ocean moon of Neptune. Frequently terrorizes colonists with its spiky tentacles", 12, 120, goldAmount, inventory);
+            return new Monster("Kraken", "Huge green sea creature that resides in an ocean moon of Neptune. Frequently terrorizes colonists with its spiky tentacles", 13, 250, goldAmount, inventory);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
