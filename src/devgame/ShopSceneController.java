@@ -12,6 +12,7 @@ import Models.Player;
 import Models.Shop;
 import Models.ShopItem;
 import Models.Weapon;
+import Sound.SoundPlayer;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -66,6 +67,7 @@ public class ShopSceneController implements Initializable, Observer {
         if (item.getBuyValue() > player.getGold()) {
             PopUp.launch("You do not have enough gold.");
         } else {
+            (new SoundPlayer()).pPlay(SoundPlayer.BUY_SELL);
             player.setGold(player.getGold() - item.getBuyValue());
             inventory.addItem(item.getItem());
         }
@@ -80,6 +82,7 @@ public class ShopSceneController implements Initializable, Observer {
             PopUp.launch("You can not sell ship parts.");
             return;
         }
+        (new SoundPlayer()).pPlay(SoundPlayer.BUY_SELL);
         inventory.removeItem(item, 1);
         player.setGold(player.getGold() + item.getSellValue());
     }
@@ -112,6 +115,7 @@ public class ShopSceneController implements Initializable, Observer {
             if (mineral.getQuantity() >= weapon.getUpgradeCost()) {
                 inventory.removeItem(mineral, weapon.getUpgradeCost());
                 weapon.upgradeWeapon();
+                (new SoundPlayer()).pPlay(SoundPlayer.UPGRADE);
                 (this).update(null, null);
                 observer.update(null, null);
             } else {

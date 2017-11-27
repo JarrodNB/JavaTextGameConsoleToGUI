@@ -8,12 +8,26 @@ import GameExceptions.PlayerIsDeadException;
 import Models.Player;
 import Models.Room;
 import Models.RoomItem;
+import Sound.SoundPlayer;
 
+/**
+ * Controller for interacting with the rooms
+ *
+ * @author jnbcb
+ */
 public class RoomHandler {
 
     private static final String HELP = "Your possible commands are look, check containerName,"
             + " fight, examine monster, solve puzzle, open inventory, save, and go to RoomName";
 
+    /**
+     * Displays room information and takes command from player
+     *
+     * @param room
+     * @throws PlayerIsDeadException
+     * @throws ItemException
+     * @throws CharacterException
+     */
     public static void enter(Room room) throws PlayerIsDeadException, ItemException, CharacterException {
         System.out.println(room.getDescription());
         while (true) {
@@ -22,8 +36,8 @@ public class RoomHandler {
             String destination = roomCommands(room, input);
             if (destination != null && room.isExitInRoom(destination)) {
                 System.out.println("You are traveling to " + destination);
-                //scanner.close();
                 try {
+                    (new SoundPlayer()).pPlay(SoundPlayer.PORTAL);
                     room.getUniverse().setCurrentRoom(room.getUniverse().getRoom(destination));
                     RoomHandler.enter(room.getUniverse().getRoom(destination));
                 } catch (NullPointerException e) {
@@ -35,6 +49,16 @@ public class RoomHandler {
         }
     }
 
+    /**
+     * Parses player input
+     *
+     * @param room
+     * @param input
+     * @return
+     * @throws PlayerIsDeadException
+     * @throws ItemException
+     * @throws CharacterException
+     */
     private static String roomCommands(Room room, String input) throws PlayerIsDeadException, ItemException, CharacterException {
 
         if (input.equals("")) {
@@ -52,7 +76,6 @@ public class RoomHandler {
             if (room.getRoomMonster() != null && room.getRoomMonster().isInRoom()) {
                 room.getUniverse().setGameState("fight");
                 Arena.fight(room.getUniverse().getPlayer(), room.getRoomMonster());
-
                 return null;
             } else {
                 System.out.println("There is no monster to fight.");
@@ -65,7 +88,7 @@ public class RoomHandler {
             }
             if (room.getRoomPuzzle().isInRoom()) {
                 room.getUniverse().setGameState("puzzle");
-                SolvePuzzle.solvePuzzle(room.getRoomPuzzle(), room.getUniverse().getPlayer(), room);
+                SolvePuzzle.solvePuzzle(room.getRoomPuzzle(), room.getUniverse().getPlayer());
             }
             return null;
         } else if (input.startsWith("examine")) {
@@ -126,6 +149,11 @@ public class RoomHandler {
         return null;
     }
 
+    /**
+     * Displays everything in the room
+     *
+     * @param room
+     */
     public static void displayRoomObjects(Room room) {
 
         if (room.getRoomGold() != null && room.getRoomGold().isInRoom()) {
@@ -157,7 +185,16 @@ public class RoomHandler {
         }
     }
 
+    /**
+     * Retrieves Items from room containers if the container is in the room
+     *
+     * @param room
+     * @param containerName
+     * @throws ItemException
+     * @throws CharacterException
+     */
     private static void getItemFromContainer(Room room, String containerName) throws ItemException, CharacterException {
+        (new SoundPlayer()).pPlay(SoundPlayer.CHECK);
         if (room.getRoomGold() != null && room.getRoomGold().isInRoom()) {
             if (room.getRoomGold().getContainerName().equalsIgnoreCase(containerName)) {
                 Player player = room.getUniverse().getPlayer();

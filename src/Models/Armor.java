@@ -7,9 +7,6 @@ import GameExceptions.ItemException;
 
 public class Armor extends Item implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 3769366528859440638L;
     private int defense;
 
@@ -18,6 +15,13 @@ public class Armor extends Item implements Serializable {
         setDefense(defense);
     }
 
+    /**
+     * Constructor for cloning
+     *
+     * @param armor
+     * @throws ItemException
+     * @throws ArmorException
+     */
     public Armor(Armor armor) throws ItemException, ArmorException {
         this(armor.getId(), armor.getName(), armor.getDescription(), armor.getBuyValue(), 1, armor.getDefence());
     }

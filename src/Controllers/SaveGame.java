@@ -8,6 +8,11 @@ import java.io.ObjectOutputStream;
 import Models.Room;
 import Models.Universe;
 
+/**
+ * Saves the game in a .dat file
+ *
+ * @author jnbcb
+ */
 public class SaveGame {
 
     public static void save(Universe universe, Room room) {

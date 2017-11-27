@@ -67,6 +67,11 @@ public class Character extends Observable implements Serializable {
         maxHealth = hp;
     }
 
+    /**
+     * Heals player up to their max hp
+     *
+     * @param amount
+     */
     public void heal(int amount) {
         if (this.healthPoints + amount > maxHealth) {
             this.healthPoints = maxHealth;

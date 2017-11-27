@@ -4,7 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/jnbcb/Desktop/Fall%202017/DevGame/src/devgame/FXMLDocumentController.java</file>
-            <file>file:/C:/Users/jnbcb/Desktop/Fall%202017/DevGame/src/Controllers/NewGame.java</file>
+            <file>file:/C:/Users/jnbcb/Desktop/Fall%202017/DevGame/src/Sound/SoundPlayer.java</file>
+            <file>file:/C:/Users/jnbcb/Desktop/Fall%202017/DevGame/src/devgame/DevGame.java</file>
+            <file>file:/C:/Users/jnbcb/Desktop/Fall%202017/DevGame/src/Controllers/Arena.java</file>
         </group>
     </open-files>
 </project-private>

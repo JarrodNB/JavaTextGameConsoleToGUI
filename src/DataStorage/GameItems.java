@@ -13,6 +13,10 @@ import Models.Item;
 import Models.ShopItem;
 import Models.Weapon;
 
+/**
+ * Static factory methods for all the items.
+ * @author jnbcb
+ */
 public class GameItems {
 
     public static Armor getPilotSuit(int quantity) {
@@ -168,6 +172,10 @@ public class GameItems {
         }
     }
 
+    /**
+     * Returns a map of items for the shop
+     * @return 
+     */
     public static Map<String, Item> getShopInventory() {
         Map<String, Item> stock = new HashMap<String, Item>();
         stock.put("Medicine", getMedicine(1));
@@ -184,6 +192,10 @@ public class GameItems {
         return stock;
     }
 
+    /**
+     * Returns a list of the ship parts
+     * @return 
+     */
     public static List<Item> getShipParts() {
         List<Item> list = new ArrayList<>();
         list.add(getCockpit());
@@ -195,6 +207,10 @@ public class GameItems {
         return list;
     }
 
+    /**
+     * Returns a list for the shop scene
+     * @return 
+     */
     public static List<ShopItem> getShopItems() {
         List<ShopItem> list = new ArrayList<>();
         list.add(new ShopItem(getMedicine(1)));

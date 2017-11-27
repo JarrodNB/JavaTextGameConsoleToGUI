@@ -11,6 +11,11 @@ import Models.RoomItem;
 import Models.RoomMonster;
 import Models.RoomPuzzle;
 
+/**
+ * Static factory methods for the rooms
+ *
+ * @author jnbcb
+ */
 public class GameRooms {
 
     public static Room getCrashSite() {
@@ -425,8 +430,8 @@ public class GameRooms {
     }
 
     public static Room getOutsidePowerPlant() {
-        String description = "You stand outside of what appears to be a large white building"
-                + " that is gated off. While it is not clear what exactly it is used for, "
+        String description = "You stand outside of what appears to be a large white building that is gated off."
+                + " While it is not clear what exactly it is used for, "
                 + "at first glance it appears to be a power plant of some sort.";
         List<RoomItem> roomItems = new ArrayList<>();
         roomItems.add(new RoomItem(GameItems.getMedicine(1), "Cabinet"));
@@ -648,6 +653,11 @@ public class GameRooms {
         return room;
     }
 
+    /**
+     * Returns a map of all the rooms.
+     *
+     * @return
+     */
     public static Map<String, Room> getRooms() {
         Map<String, Room> rooms = new HashMap<String, Room>();
         rooms.put("Crash Site", getCrashSite());

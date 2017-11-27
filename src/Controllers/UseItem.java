@@ -4,8 +4,19 @@ import GameExceptions.ItemException;
 import GameExceptions.YouDontHaveThatException;
 import Models.Player;
 
+/**
+ * Controller for healing item use
+ *
+ * @author jnbcb
+ */
 public class UseItem {
 
+    /**
+     * Heals player and removes item
+     *
+     * @param player
+     * @param itemName
+     */
     public static void useItem(Player player, String itemName) {
         int playerMax = player.getMaxHealth();
         try {

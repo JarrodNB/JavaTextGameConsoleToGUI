@@ -4,6 +4,11 @@ import Models.Inventory;
 import Models.Item;
 import Models.Monster;
 
+/**
+ * Static factory methods for the game monsters.
+ *
+ * @author jnbcb
+ */
 public class GameMonsters {
 
     public static Monster getSpacePirate(Item item, int goldAmount) {

@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.PipedOutputStream;
 import java.io.PrintStream;
 import java.io.StringBufferInputStream;
 import java.net.URL;
@@ -101,15 +100,11 @@ public class FXMLDocumentController implements Initializable, Observer {
     private Button unequipArmorButton;
     @FXML
     private AnchorPane pane;
-    
+
     private int clearCount = 0;
-    
+
     private final TextArea gamelog = new TextArea();
-    
-    // add sound
-    // rearrange exits so previous room is last
-    // start commenting
-    // space in name
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         OutputStream out = new OutputStream() {
@@ -128,6 +123,11 @@ public class FXMLDocumentController implements Initializable, Observer {
         new File("C:\\Voyager\\").mkdir();
     }
 
+    /**
+     * Takes user input from text field and sends to system.in Used for Puzzles
+     *
+     * @param event
+     */
     @FXML
     private void submitCommand(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -136,12 +136,23 @@ public class FXMLDocumentController implements Initializable, Observer {
         }
     }
 
+    /**
+     * Adds text to the text areas Part of redirecting System.out to the GUI
+     *
+     * @param str
+     */
     public void appendText(String str) {
         Platform.runLater(() -> textArea.appendText(str));
         Platform.runLater(() -> gamelog.appendText(str));
 
     }
 
+    /**
+     * Sends a string to System.in and notifies the game that a new string has
+     * been added.
+     *
+     * @param command
+     */
     private void sendText(String command) {
         if (command == null) {
             return;
@@ -160,9 +171,14 @@ public class FXMLDocumentController implements Initializable, Observer {
         }
     }
 
+    /**
+     * Prompts user for a name. If the name is valid then the game begins.
+     *
+     * @param event
+     */
     @FXML
     private void newGame(ActionEvent event) {
-        TextInputDialog dialog = new TextInputDialog("Player name");
+        TextInputDialog dialog = new TextInputDialog("Name");
         dialog.setContentText("Please enter a valid player name.");
         Optional<String> name = dialog.showAndWait();
         Alert alert = new Alert(AlertType.ERROR);
@@ -180,9 +196,10 @@ public class FXMLDocumentController implements Initializable, Observer {
     }
 
     /**
-     * 
+     * Allows user to select a previous save file
+     *
      * @param event
-     * @throws IOException 
+     * @throws IOException
      */
     @FXML
     private void loadGame(ActionEvent event) throws IOException {
@@ -201,11 +218,20 @@ public class FXMLDocumentController implements Initializable, Observer {
         }
     }
 
+    /**
+     * Updates Inventory list view
+     */
     private void updateInventory() {
         inventoryListView.getItems().clear();
         inventoryListView.getItems().addAll(player.getInventory().getInventory());
     }
 
+    /**
+     * On click listener for the inventory list view Left click will attempt to
+     * use the item Right click will print a description
+     *
+     * @param event
+     */
     @FXML
     private void inventoryInteraction(MouseEvent event) {
         Item item = inventoryListView.getSelectionModel().getSelectedItem();
@@ -235,6 +261,13 @@ public class FXMLDocumentController implements Initializable, Observer {
         }
     }
 
+    /**
+     * Observer method Refreshes player stats and inventory if called. Changes
+     * command list view if Universe is changed
+     *
+     * @param o
+     * @param arg
+     */
     @Override
     public void update(Observable o, Object arg) {
         Platform.runLater(() -> fillPlayer());
@@ -243,9 +276,12 @@ public class FXMLDocumentController implements Initializable, Observer {
             commandField.setVisible(false);
         }
         Platform.runLater(() -> updateInventory());
-        
+
     }
 
+    /**
+     * Sets the text for the player information on GUI
+     */
     private void fillPlayer() {
         playerName.setText(player.getName());
         if (player.getHealthPoints() < 10) {
@@ -274,12 +310,22 @@ public class FXMLDocumentController implements Initializable, Observer {
         }
     }
 
+    /**
+     * Checks if the players name is valid
+     *
+     * @param name
+     * @param alert shown if name is invalid
+     * @return boolean true if name is valid
+     */
     private boolean validateName(String name, Alert alert) {
-
+        name = name.trim();
         if (name == null || name.equals("")) {
             alert.setContentText("Name may not be blank.");
             return false;
-        } else if (name.matches("[a-zA-Z ]+")) {
+        } else if (name.length() > 10) {
+            alert.setContentText("Your name is too long.");
+            return false;
+        } else if (name.matches("[a-zA-Z]+")) {
             File fileCheck = new File("C:\\Voyager\\" + name + ".dat");
             if (fileCheck.exists()) {
                 alert.setContentText("Player already exists.");
@@ -292,6 +338,12 @@ public class FXMLDocumentController implements Initializable, Observer {
         }
     }
 
+    /**
+     * Creates a new player for new games
+     *
+     * @param pName
+     * @return the created player
+     */
     private Player createPlayer(String pName) {
         try {
             Inventory inventory = new Inventory();
@@ -305,6 +357,11 @@ public class FXMLDocumentController implements Initializable, Observer {
         }
     }
 
+    /**
+     * Stops current thread is active. Starts the game in another thread
+     *
+     * @param player The player to start the game with
+     */
     private void startNewGame(Player player) {
         if (thread != null) {
             thread.stop();
@@ -321,6 +378,12 @@ public class FXMLDocumentController implements Initializable, Observer {
         thread.start();
     }
 
+    /**
+     * Takes a save file and rebuilds the Universe
+     *
+     * @param file Selected save file
+     * @return The universe from the .dat
+     */
     private Universe loadGameFile(File file) {
         FileInputStream fileStream = null;
         try {
@@ -349,6 +412,11 @@ public class FXMLDocumentController implements Initializable, Observer {
         }
     }
 
+    /**
+     * Loads the saved game into the game and starts it
+     *
+     * @param universe
+     */
     private void startLoadGame(Universe universe) {
         if (thread != null) {
             thread.stop();
@@ -362,12 +430,24 @@ public class FXMLDocumentController implements Initializable, Observer {
         thread.start();
     }
 
+    /**
+     * On click for the command list view When clicked it takes the selected
+     * string and sends it to the game
+     *
+     * @param event
+     */
     @FXML
     private void executeCommand(MouseEvent event) {
         String command = commandListView.getSelectionModel().getSelectedItem();
         sendText(command);
     }
 
+    /**
+     * Used to select which commands fill the listview
+     *
+     * @param arg The gamestate
+     * @param universe The current universe
+     */
     private void updateCommands(String arg, Universe universe) {
         switch (arg) {
             case "room":
@@ -385,11 +465,19 @@ public class FXMLDocumentController implements Initializable, Observer {
         }
     }
 
+    /**
+     * Fills command list view with the current room commands
+     *
+     * @param universe
+     */
     private void fillWithRooms(Universe universe) {
         List<String> commands = universe.getCurrentRoom().getCommands();
         Platform.runLater(() -> fillCommandView(commands));
     }
 
+    /**
+     * Fills command list view with fight commands
+     */
     private void fillWithFight() {
         List<String> commands = new ArrayList<>();
         commands.add("Attack");
@@ -398,6 +486,10 @@ public class FXMLDocumentController implements Initializable, Observer {
         Platform.runLater(() -> fillCommandView(commands));
     }
 
+    /**
+     * Fiils command list view with puzzle commands and enables the text field
+     * to enter answers
+     */
     private void fillWithPuzzle() {
         List<String> commands = new ArrayList<>();
         commands.add("Give Up");
@@ -406,6 +498,9 @@ public class FXMLDocumentController implements Initializable, Observer {
         Platform.runLater(() -> commandField.setVisible(true));
     }
 
+    /**
+     * Launches the shop scene
+     */
     private void shopScene() {
         try {
             FXMLLoader root = new FXMLLoader(getClass().getResource("ShopScene.fxml"));
@@ -423,11 +518,21 @@ public class FXMLDocumentController implements Initializable, Observer {
         }
     }
 
+    /**
+     * Fills command list view with the list of commands
+     *
+     * @param commands List to fill list view
+     */
     private void fillCommandView(List<String> commands) {
         commandListView.getItems().clear();
         commandListView.getItems().addAll(commands);
     }
 
+    /**
+     * On action. Saves the current game
+     *
+     * @param event
+     */
     @FXML
     private void saveGame(ActionEvent event) {
         FileOutputStream fileOut = null;
@@ -447,6 +552,12 @@ public class FXMLDocumentController implements Initializable, Observer {
         }
     }
 
+    /**
+     * On action. unequips the players weapon
+     *
+     * @param event
+     * @throws ItemException
+     */
     @FXML
     private void unequipWeapon(ActionEvent event) throws ItemException {
         if (player != null) {
@@ -454,6 +565,12 @@ public class FXMLDocumentController implements Initializable, Observer {
         }
     }
 
+    /**
+     * On action. unequips player armor
+     *
+     * @param event
+     * @throws ItemException
+     */
     @FXML
     private void unequipArmor(ActionEvent event) throws ItemException {
         if (player != null) {
@@ -461,6 +578,11 @@ public class FXMLDocumentController implements Initializable, Observer {
         }
     }
 
+    /**
+     * Launches a scene with a text area containing the games input and output
+     *
+     * @param event
+     */
     @FXML
     private void launchLog(ActionEvent event) {
         Stage stage = new Stage();
@@ -476,6 +598,11 @@ public class FXMLDocumentController implements Initializable, Observer {
         stage.show();
     }
 
+    /**
+     * On action. Prints help information
+     *
+     * @param event
+     */
     @FXML
     private void displayHelp(ActionEvent event) {
         String help = "Select new game or load game to begin.\n"

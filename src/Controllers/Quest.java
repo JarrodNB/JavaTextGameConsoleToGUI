@@ -7,6 +7,12 @@ import Models.Inventory;
 import Models.Item;
 import Models.Player;
 
+/**
+ * List of ship parts and their locations .
+ * Checks if player has all the ship parts required for beating the game
+ *
+ * @author jnbcb
+ */
 public class Quest {
 
     public static void display(Player player) {
@@ -18,8 +24,8 @@ public class Quest {
         System.out.println("The communication network can be found somewhere around Saturn");
         System.out.println("The defense turret can be found somewhere around Venus");
         if (checkForParts(player.getInventory())) {
-            System.out.println("You have all the ship parts! Now we can go home!");
-            System.out.println("You have beaten the game and get nothing for it. Keep playing if you want...");
+            System.out.println("\nYou have all the ship parts! Now we can go home!");
+            System.out.println("\nYou have beaten the game and get nothing for it. Keep playing if you want...");
         } else {
             System.out.println("You are still missing parts.");
         }

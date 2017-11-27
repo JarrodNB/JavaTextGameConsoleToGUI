@@ -2,6 +2,11 @@ package DataStorage;
 
 import Models.Puzzle;
 
+/**
+ * Static factory methods for puzzles
+ *
+ * @author jnbcb
+ */
 public class GamePuzzles {
 
     public static Puzzle getFirstPuzzle() {
